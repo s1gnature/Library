@@ -1,0 +1,6 @@
+framework module Pods_Senior5th_cocoapod {
+  umbrella header "Pods-Senior5th_cocoapod-umbrella.h"
+
+  export *
+  module * { export * }
+}

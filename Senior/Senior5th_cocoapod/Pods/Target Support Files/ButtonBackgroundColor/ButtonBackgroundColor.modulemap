@@ -1,0 +1,6 @@
+framework module ButtonBackgroundColor {
+  umbrella header "ButtonBackgroundColor-umbrella.h"
+
+  export *
+  module * { export * }
+}
