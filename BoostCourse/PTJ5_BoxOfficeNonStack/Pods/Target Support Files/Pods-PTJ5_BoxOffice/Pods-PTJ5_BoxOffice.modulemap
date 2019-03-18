@@ -1,0 +1,6 @@
+framework module Pods_PTJ5_BoxOffice {
+  umbrella header "Pods-PTJ5_BoxOffice-umbrella.h"
+
+  export *
+  module * { export * }
+}
