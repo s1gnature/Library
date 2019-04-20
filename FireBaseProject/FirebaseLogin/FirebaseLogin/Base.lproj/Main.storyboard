@@ -65,11 +65,104 @@
                         <outlet property="FBLoginBtn" destination="tFF-Ou-1OV" id="gTr-DG-huM"/>
                         <outlet property="emailTextField" destination="Jdj-nD-Bew" id="Lnc-Hh-m42"/>
                         <outlet property="passwordTextField" destination="Ai4-IJ-tFY" id="s4n-qg-SBS"/>
+                        <segue destination="pm6-iH-h6Q" kind="show" identifier="LoginSegue" id="uL8-02-d8G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="53.600000000000001" y="26.53673163418291"/>
         </scene>
+        <!--Home-->
+        <scene sceneID="Caq-vf-8k5">
+            <objects>
+                <viewController storyboardIdentifier="VC2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZWT-zO-8u1" customClass="HomeVC" customModule="FirebaseLogin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HYP-Ke-847">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tt-ii-Y6l">
+                                <rect key="frame" x="166.5" y="323" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0tt-ii-Y6l" firstAttribute="centerX" secondItem="HYP-Ke-847" secondAttribute="centerX" id="fd8-ND-aDq"/>
+                            <constraint firstItem="0tt-ii-Y6l" firstAttribute="centerY" secondItem="HYP-Ke-847" secondAttribute="centerY" id="zZ3-yo-ZOb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="o5J-4V-lhx"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Home" image="home" selectedImage="home" id="RUl-Hx-J9x"/>
+                    <connections>
+                        <outlet property="UserLabel" destination="0tt-ii-Y6l" id="72w-ap-Pf0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dEW-lb-CLo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1598" y="-305"/>
+        </scene>
+        <!--User-->
+        <scene sceneID="DmZ-4Y-m9B">
+            <objects>
+                <viewController id="maj-HX-1aI" customClass="UserVC" customModule="FirebaseLogin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AKW-mB-IQQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWe-dc-Xv1">
+                                <rect key="frame" x="131.5" y="318.5" width="112" height="30"/>
+                                <state key="normal" title="프로필 사진 업로드"/>
+                                <connections>
+                                    <action selector="profileUploadBtn:" destination="maj-HX-1aI" eventType="touchUpInside" id="iFI-KT-r7s"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bnk-iu-r9r">
+                                <rect key="frame" x="163.5" y="358.5" width="48" height="30"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="LogoutBtn:" destination="maj-HX-1aI" eventType="touchUpInside" id="bJc-oW-Ipu"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bnk-iu-r9r" firstAttribute="top" secondItem="DWe-dc-Xv1" secondAttribute="bottom" constant="10" id="LQr-5T-4Qt"/>
+                            <constraint firstItem="bnk-iu-r9r" firstAttribute="centerX" secondItem="AKW-mB-IQQ" secondAttribute="centerX" id="OrK-lg-e1a"/>
+                            <constraint firstItem="DWe-dc-Xv1" firstAttribute="centerY" secondItem="AKW-mB-IQQ" secondAttribute="centerY" id="c6d-Tg-UkQ"/>
+                            <constraint firstItem="DWe-dc-Xv1" firstAttribute="centerX" secondItem="AKW-mB-IQQ" secondAttribute="centerX" id="hev-Dt-Fdo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="mgH-3s-tVm"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="User" image="user_male" selectedImage="user_male" id="bCb-Ct-tp5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qY2-hf-QFH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1598" y="437"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="gsN-ge-qP3">
+            <objects>
+                <tabBarController storyboardIdentifier="VCTab" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pm6-iH-h6Q" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WfX-ey-hUv">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ZWT-zO-8u1" kind="relationship" relationship="viewControllers" id="E4o-qG-AaS"/>
+                        <segue destination="maj-HX-1aI" kind="relationship" relationship="viewControllers" id="eog-Z9-bXS"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="igt-6z-3pZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="765.60000000000002" y="26.53673163418291"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="home" width="30" height="30"/>
+        <image name="user_male" width="30" height="30"/>
+    </resources>
 </document>

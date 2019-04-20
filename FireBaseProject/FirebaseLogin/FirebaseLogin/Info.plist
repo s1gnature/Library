@@ -24,16 +24,18 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.40018828887-m8f0hcb6pefv9c4gngvrigvc7k0pkkqn</string>
-                <string>fb2250666018520891</string>
+				<string>fb2250666018520891</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-    <key>FacebookAppID</key>
-    <string>2250666018520891</string>
-    <key>FacebookDisplayName</key>
-    <string>mong_firebase</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string></string>
+	<key>FacebookAppID</key>
+	<string>2250666018520891</string>
+	<key>FacebookDisplayName</key>
+	<string>mong_firebase</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>

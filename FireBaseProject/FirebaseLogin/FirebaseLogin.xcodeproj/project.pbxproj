@@ -14,6 +14,8 @@
 		FAC217B52265B08B0001AC6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAC217B42265B08B0001AC6D /* Assets.xcassets */; };
 		FAC217B82265B08B0001AC6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAC217B62265B08B0001AC6D /* LaunchScreen.storyboard */; };
 		FAC217C02265B2EC0001AC6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAC217BF2265B2EC0001AC6D /* GoogleService-Info.plist */; };
+		FAC217C222686E440001AC6D /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC217C122686E440001AC6D /* HomeVC.swift */; };
+		FAC217C422686E5C0001AC6D /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC217C322686E5C0001AC6D /* UserVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		FAC217B72265B08B0001AC6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAC217B92265B08B0001AC6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAC217BF2265B2EC0001AC6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FAC217C122686E440001AC6D /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		FAC217C322686E5C0001AC6D /* UserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,8 @@
 				FAC217AD2265B0890001AC6D /* AppDelegate.swift */,
 				FAC217AF2265B0890001AC6D /* ViewController.swift */,
 				FAC217B12265B0890001AC6D /* Main.storyboard */,
+				FAC217C122686E440001AC6D /* HomeVC.swift */,
+				FAC217C322686E5C0001AC6D /* UserVC.swift */,
 				FAC217B42265B08B0001AC6D /* Assets.xcassets */,
 				FAC217B62265B08B0001AC6D /* LaunchScreen.storyboard */,
 				FAC217B92265B08B0001AC6D /* Info.plist */,
@@ -247,8 +253,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAC217C222686E440001AC6D /* HomeVC.swift in Sources */,
 				FAC217B02265B0890001AC6D /* ViewController.swift in Sources */,
 				FAC217AE2265B0890001AC6D /* AppDelegate.swift in Sources */,
+				FAC217C422686E5C0001AC6D /* UserVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
