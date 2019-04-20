@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EB40DE026C6E178C6AE2B2E6 /* Pods_FirebaseLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1628B317614A9ED3327E6FCA /* Pods_FirebaseLogin.framework */; };
+		FABC2C7C226B1383003082C9 /* UploadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC2C7B226B1383003082C9 /* UploadVC.swift */; };
 		FAC217AE2265B0890001AC6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC217AD2265B0890001AC6D /* AppDelegate.swift */; };
 		FAC217B02265B0890001AC6D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC217AF2265B0890001AC6D /* ViewController.swift */; };
 		FAC217B32265B0890001AC6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAC217B12265B0890001AC6D /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 		1628B317614A9ED3327E6FCA /* Pods_FirebaseLogin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseLogin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AD7B78873AF1FC02112DE26 /* Pods-FirebaseLogin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseLogin.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseLogin/Pods-FirebaseLogin.release.xcconfig"; sourceTree = "<group>"; };
 		85EB572C13FD2F751E3DD928 /* Pods-FirebaseLogin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseLogin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseLogin/Pods-FirebaseLogin.debug.xcconfig"; sourceTree = "<group>"; };
+		FABC2C7B226B1383003082C9 /* UploadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadVC.swift; sourceTree = "<group>"; };
 		FAC217AA2265B0890001AC6D /* FirebaseLogin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseLogin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAC217AD2265B0890001AC6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAC217AF2265B0890001AC6D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				FAC217B12265B0890001AC6D /* Main.storyboard */,
 				FAC217C122686E440001AC6D /* HomeVC.swift */,
 				FAC217C322686E5C0001AC6D /* UserVC.swift */,
+				FABC2C7B226B1383003082C9 /* UploadVC.swift */,
 				FAC217B42265B08B0001AC6D /* Assets.xcassets */,
 				FAC217B62265B08B0001AC6D /* LaunchScreen.storyboard */,
 				FAC217B92265B08B0001AC6D /* Info.plist */,
@@ -205,6 +208,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -217,6 +221,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,6 +261,7 @@
 				FAC217C222686E440001AC6D /* HomeVC.swift in Sources */,
 				FAC217B02265B0890001AC6D /* ViewController.swift in Sources */,
 				FAC217AE2265B0890001AC6D /* AppDelegate.swift in Sources */,
+				FABC2C7C226B1383003082C9 /* UploadVC.swift in Sources */,
 				FAC217C422686E5C0001AC6D /* UserVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -115,7 +115,7 @@
                                 <rect key="frame" x="131.5" y="318.5" width="112" height="30"/>
                                 <state key="normal" title="프로필 사진 업로드"/>
                                 <connections>
-                                    <action selector="profileUploadBtn:" destination="maj-HX-1aI" eventType="touchUpInside" id="iFI-KT-r7s"/>
+                                    <segue destination="qdM-1j-fhs" kind="show" id="9OR-Sn-SVY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bnk-iu-r9r">
@@ -140,6 +140,69 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qY2-hf-QFH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1598" y="437"/>
+        </scene>
+        <!--UploadVC-->
+        <scene sceneID="5Qe-C0-dgr">
+            <objects>
+                <viewController storyboardIdentifier="UploadVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qdM-1j-fhs" customClass="UploadVC" customModule="FirebaseLogin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MSi-Ys-nIq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rNL-hW-MZU">
+                                <rect key="frame" x="67" y="68" width="241" height="160.5"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gvb-ta-G9K">
+                                <rect key="frame" x="164.5" y="318.5" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="UploadBtn:" destination="qdM-1j-fhs" eventType="touchUpInside" id="W4R-3B-fzH"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YbV-fX-uqD">
+                                <rect key="frame" x="87.5" y="238.5" width="200" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="5Kt-OS-ZTQ"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eih-nT-PbP">
+                                <rect key="frame" x="87.5" y="278.5" width="200" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="T9Z-5O-Zcy"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eih-nT-PbP" firstAttribute="centerX" secondItem="MSi-Ys-nIq" secondAttribute="centerX" id="4xk-SJ-gjY"/>
+                            <constraint firstItem="Gvb-ta-G9K" firstAttribute="centerX" secondItem="MSi-Ys-nIq" secondAttribute="centerX" id="5Np-kC-mxk"/>
+                            <constraint firstItem="rNL-hW-MZU" firstAttribute="top" secondItem="VPu-Tv-ngU" secondAttribute="top" constant="48" id="Gye-d0-Jpe"/>
+                            <constraint firstItem="VPu-Tv-ngU" firstAttribute="trailing" secondItem="rNL-hW-MZU" secondAttribute="trailing" constant="67" id="Xe6-b4-X2p"/>
+                            <constraint firstItem="eih-nT-PbP" firstAttribute="top" secondItem="YbV-fX-uqD" secondAttribute="bottom" constant="10" id="dHr-L2-u9s"/>
+                            <constraint firstItem="rNL-hW-MZU" firstAttribute="leading" secondItem="VPu-Tv-ngU" secondAttribute="leading" constant="67" id="e1D-yY-5Uq"/>
+                            <constraint firstItem="Gvb-ta-G9K" firstAttribute="top" secondItem="eih-nT-PbP" secondAttribute="bottom" constant="10" id="fDq-8M-WcU"/>
+                            <constraint firstItem="rNL-hW-MZU" firstAttribute="centerX" secondItem="MSi-Ys-nIq" secondAttribute="centerX" id="fOx-S1-73Y"/>
+                            <constraint firstItem="Gvb-ta-G9K" firstAttribute="centerY" secondItem="MSi-Ys-nIq" secondAttribute="centerY" id="pZo-Zt-15i"/>
+                            <constraint firstItem="YbV-fX-uqD" firstAttribute="top" secondItem="rNL-hW-MZU" secondAttribute="bottom" constant="10" id="tqF-BS-z4e"/>
+                            <constraint firstItem="YbV-fX-uqD" firstAttribute="centerX" secondItem="MSi-Ys-nIq" secondAttribute="centerX" id="uyZ-mH-Wfr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VPu-Tv-ngU"/>
+                    </view>
+                    <connections>
+                        <outlet property="explainTextField" destination="eih-nT-PbP" id="ol3-VT-UXc"/>
+                        <outlet property="imageView" destination="rNL-hW-MZU" id="j2D-kt-rLO"/>
+                        <outlet property="subjectTextField" destination="YbV-fX-uqD" id="Z3t-Zs-o6U"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1aW-Py-0j5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2320.8000000000002" y="436.73163418290858"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gsN-ge-qP3">
