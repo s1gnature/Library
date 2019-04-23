@@ -98,21 +98,21 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CQc-71-dF7">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zcy-0I-0GP">
-                                                    <rect key="frame" x="20" y="115" width="335" height="30"/>
+                                                    <rect key="frame" x="20" y="132" width="335" height="25"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="JZy-xm-4nM"/>
+                                                        <constraint firstAttribute="height" constant="25" id="JZy-xm-4nM"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSJ-37-6gE">
-                                                    <rect key="frame" x="20" y="150" width="335" height="30"/>
+                                                    <rect key="frame" x="20" y="162" width="335" height="25"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="rDM-aI-V18"/>
+                                                        <constraint firstAttribute="height" constant="25" id="rDM-aI-V18"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -127,7 +127,7 @@
                                             <constraint firstItem="oSJ-37-6gE" firstAttribute="leading" secondItem="1OD-US-2ME" secondAttribute="leadingMargin" constant="12" id="GX5-Ux-0xQ"/>
                                             <constraint firstItem="CQc-71-dF7" firstAttribute="leading" secondItem="1OD-US-2ME" secondAttribute="leading" id="IPW-2o-Xhg"/>
                                             <constraint firstAttribute="trailing" secondItem="CQc-71-dF7" secondAttribute="trailing" id="Iqx-n8-sKj"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="oSJ-37-6gE" secondAttribute="bottom" constant="12" id="S04-z4-nxU"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="oSJ-37-6gE" secondAttribute="bottom" constant="5" id="S04-z4-nxU"/>
                                             <constraint firstItem="Zcy-0I-0GP" firstAttribute="leading" secondItem="1OD-US-2ME" secondAttribute="leadingMargin" constant="12" id="Uck-cG-r1a"/>
                                             <constraint firstItem="CQc-71-dF7" firstAttribute="top" secondItem="1OD-US-2ME" secondAttribute="top" id="X2j-wn-S56"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="oSJ-37-6gE" secondAttribute="trailing" constant="12" id="fkp-Yn-H2v"/>
