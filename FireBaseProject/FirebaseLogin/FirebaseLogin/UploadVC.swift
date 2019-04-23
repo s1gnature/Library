@@ -69,7 +69,8 @@ class UploadVC: UIViewController, UIImagePickerControllerDelegate,UINavigationCo
                     "uID": Auth.auth().currentUser?.uid,
                     "subject": self.subjectTextField.text!,
                     "explanation": self.explainTextField.text!,
-                    "imageURL": "\(downloadURL)"
+                    "imageURL": "\(downloadURL)",
+                    "starCount": 0
                     ])
             }
         }

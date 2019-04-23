@@ -15,4 +15,6 @@ class UserVO: NSObject{
     var subject: String?
     var explanation: String?
     var imageURL: String?
+    var starCount: Int?
+    var stars: Dictionary<String,Bool>?
 }

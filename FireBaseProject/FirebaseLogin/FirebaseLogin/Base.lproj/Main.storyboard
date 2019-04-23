@@ -101,7 +101,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zcy-0I-0GP">
-                                                    <rect key="frame" x="20" y="132" width="335" height="25"/>
+                                                    <rect key="frame" x="20" y="132" width="42" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="JZy-xm-4nM"/>
                                                     </constraints>
@@ -110,7 +110,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSJ-37-6gE">
-                                                    <rect key="frame" x="20" y="162" width="335" height="25"/>
+                                                    <rect key="frame" x="20" y="162" width="42" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="rDM-aI-V18"/>
                                                     </constraints>
@@ -118,23 +118,28 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKq-CW-ZaA">
+                                                    <rect key="frame" x="327" y="148" width="30" height="34"/>
+                                                    <state key="normal" title="🖤"/>
+                                                </button>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="oSJ-37-6gE" firstAttribute="top" secondItem="Zcy-0I-0GP" secondAttribute="bottom" constant="5" id="7PX-vl-8bD"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="Zcy-0I-0GP" secondAttribute="trailing" constant="12" id="Bbw-Aj-85I"/>
                                             <constraint firstItem="oSJ-37-6gE" firstAttribute="top" secondItem="Zcy-0I-0GP" secondAttribute="bottom" constant="5" id="FOy-P2-EId"/>
                                             <constraint firstItem="oSJ-37-6gE" firstAttribute="leading" secondItem="1OD-US-2ME" secondAttribute="leadingMargin" constant="12" id="GX5-Ux-0xQ"/>
                                             <constraint firstItem="CQc-71-dF7" firstAttribute="leading" secondItem="1OD-US-2ME" secondAttribute="leading" id="IPW-2o-Xhg"/>
                                             <constraint firstAttribute="trailing" secondItem="CQc-71-dF7" secondAttribute="trailing" id="Iqx-n8-sKj"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="YKq-CW-ZaA" secondAttribute="bottom" constant="10" id="LpD-GJ-t8s"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="oSJ-37-6gE" secondAttribute="bottom" constant="5" id="S04-z4-nxU"/>
                                             <constraint firstItem="Zcy-0I-0GP" firstAttribute="leading" secondItem="1OD-US-2ME" secondAttribute="leadingMargin" constant="12" id="Uck-cG-r1a"/>
                                             <constraint firstItem="CQc-71-dF7" firstAttribute="top" secondItem="1OD-US-2ME" secondAttribute="top" id="X2j-wn-S56"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="oSJ-37-6gE" secondAttribute="trailing" constant="12" id="fkp-Yn-H2v"/>
                                             <constraint firstItem="Zcy-0I-0GP" firstAttribute="top" secondItem="CQc-71-dF7" secondAttribute="bottom" constant="5" id="vxh-N4-GE4"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="YKq-CW-ZaA" secondAttribute="trailing" constant="10" id="xkN-aS-4fr"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="explanationLabel" destination="oSJ-37-6gE" id="yBY-Q3-L9Q"/>
+                                            <outlet property="favoriteBtn" destination="YKq-CW-ZaA" id="ROz-9j-YbX"/>
                                             <outlet property="imageView" destination="CQc-71-dF7" id="P2C-nN-xPI"/>
                                             <outlet property="subjectLabel" destination="Zcy-0I-0GP" id="q0F-WJ-3bo"/>
                                         </connections>

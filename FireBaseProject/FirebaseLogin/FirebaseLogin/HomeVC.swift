@@ -9,14 +9,15 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet var collectionView: UICollectionView!
     
     var Users: [UserVO] = []
+    var uID: [String] = []
     
-    // uid로 받아와야합니당
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Users.count
     }
@@ -29,11 +30,66 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         print(Users[indexPath.row].uID!)
         let data = try? Data(contentsOf: URL(string: Users[indexPath.row].imageURL!)!)
         cell.imageView.image = UIImage(data: data!)
+
+        cell.favoriteBtn.tag = indexPath.row
+        cell.favoriteBtn.addTarget(self, action: #selector(like(_:)), for: .touchUpInside)
+        
+        
+        // stars 에서 사용자의 uID로 stars<Dictionary>를 조회해서 만약 사용자가
+        // like button 을 눌렀다면 true 값이 DB로 반환될것임. 그러므로 image 는
+        // true에 해당하는 이미지를 보여주고 아니라면 default 이미지 보여줌.
+        // 그런데 아래에 requestUserData 구문 중 강의에서 나오는 구문이 뻑나서
+        // 내쪼대로 만들어놨는데 저기서는 like가 아닐 시 DB 상에서 stars 변수가
+        // 삭제돼서 없기 때문에 불러오지를 못함. 그래서 해당 DB에서
+        // stars[currentUser.uID] == nil 일때는
+        // 임시로 Dictionary<currentUser.uID,false> 로 만들어서 append 해주고
+        //  각 셀에 뿌려줄때 true / false 로 분기해서 이미지 할당.
+        if(Users[indexPath.row].stars![uID[indexPath.row]]!){
+            cell.favoriteBtn.setImage(UIImage(named: "heart"), for: .normal)
+        }else{
+            cell.favoriteBtn.setImage(UIImage(named: "plus"), for: .normal)
+        }
+        
+
+        
+        
         return cell
     }
     
     @IBAction func requestBtn(_ sender: Any) {
         requestUserData()
+    }
+    
+    // MARK:: Transaction 여러 사용자가 동시에 접근하는걸 방지
+    @objc func like(_ sender: UIButton){
+        DBRef.child("users").child(uID[sender.tag]).runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
+            if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
+                var stars: Dictionary<String, Bool>
+                stars = post["stars"] as? [String : Bool] ?? [:]
+                var starCount = post["starCount"] as? Int ?? 0
+                if let _ = stars[uid] {
+                    // Unstar the post and remove self from stars
+                    starCount -= 1
+                    stars.removeValue(forKey: uid)
+                } else {
+                    // Star the post and add self to stars
+                    starCount += 1
+                    stars[uid] = true
+                }
+                post["starCount"] = starCount as AnyObject?
+                post["stars"] = stars as AnyObject?
+                
+                // Set value and report transaction success
+                currentData.value = post
+                
+                return TransactionResult.success(withValue: currentData)
+            }
+            return TransactionResult.success(withValue: currentData)
+        }) { (error, committed, snapshot) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func requestUserData(){
@@ -42,7 +98,18 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             // Get user value
             // value == ALL OF users.child
             let value = snapshot.value as! NSDictionary
-//            let child = value[(Auth.auth().currentUser?.uid)!] as! NSDictionary
+            
+            /*
+             // 이게 강의에서 나오는 구문인데 뻑남...
+            for child in snapshot.children{
+                let fchild = child as! DataSnapshot
+                let user = UserVO()
+                
+                user.setValuesForKeys(fchild.value as! [String:Any])
+                self.Users.append(user)
+            }
+             */
+            
             for key in value.allKeys{
                 let child = value[key] as! NSDictionary
                 let user = UserVO()
@@ -51,31 +118,16 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 user.userID = child["userID"] as! String
                 user.subject = child["subject"] as! String
                 user.imageURL = child["imageURL"] as! String
+                if(child["stars"] == nil){
+                    user.stars = Dictionary.init(dictionaryLiteral: (user.uID!,false))
+                }else{
+                    user.stars = child["stars"] as! Dictionary
+                }
+//                user.starCount = child["starCount"] as! Int
                 self.Users.append(user)
             }
+            self.uID = value.allKeys as! [String]
             
-//            let user = UserVO()
-//            user.explanation = child["explanation"] as! String
-//            user.uID = child["uID"] as! String
-//            user.userID = child["userID"] as! String
-//            user.subject = child["subject"] as! String
-//            user.imageURL = child["imageURL"] as! String
-//            self.Users.append(user)
-            
-            //            user.uID = child["uID"] as! String
-            //            print(user.uID)
-            
-            //            let VO: NSDictionary = value(forKey: "\(Auth.auth().currentUser?.uid)")
-            
-            //            for child in snapshot.children{
-            //                print(child)
-            
-            //                let user = UserVO()
-            
-            //                self.Users.append(user)
-            //                self.userUID.append(user)
-            //            }
-            // ...
             self.collectionView.reloadData()
         })
     }
@@ -83,7 +135,5 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func viewDidLoad() {
         collectionView.dataSource = self
         collectionView.delegate = self
-        
-        print(Users)
     }
 }
