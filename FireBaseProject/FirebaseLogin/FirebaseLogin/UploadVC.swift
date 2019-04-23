@@ -11,13 +11,14 @@ import Firebase
 import FirebaseStorage
 import FirebaseDatabase
 
+let DBRef = Database.database().reference()
+let firebaseStorage = Storage.storage()
+
 class UploadVC: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var subjectTextField: UITextField!
     @IBOutlet var explainTextField: UITextField!
     
-    let DBRef = Database.database().reference()
-    let firebaseStorage = Storage.storage()
     
     @IBAction func UploadBtn(_ sender: Any) {
         uploadToFirebase()
@@ -63,7 +64,7 @@ class UploadVC: UIViewController, UIImagePickerControllerDelegate,UINavigationCo
   
                 // child 해줄때 string 길이의 한계가 있는듯. 근데 childbyAutoID 에서는 길이가 상관이없는데.. 왜그럴까
                 // 이거 경로상 특수문자가 포함이 되면 안되는듯! 그래서 email을 child로는 포함이 안되고 uid로는 가능한거같다!
-                self.DBRef.child("users").child((Auth.auth().currentUser?.uid)!).setValue([
+                DBRef.child("users").child((Auth.auth().currentUser?.uid)!).setValue([
                     "userID": Auth.auth().currentUser?.email,
                     "uID": Auth.auth().currentUser?.uid,
                     "subject": self.subjectTextField.text!,
