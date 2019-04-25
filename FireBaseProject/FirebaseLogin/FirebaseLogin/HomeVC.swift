@@ -44,13 +44,25 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         // stars[currentUser.uID] == nil 일때는
         // 임시로 Dictionary<currentUser.uID,false> 로 만들어서 append 해주고
         //  각 셀에 뿌려줄때 true / false 로 분기해서 이미지 할당.
-        if(Users[indexPath.row].stars![uID[indexPath.row]]!){
+        
+//        if(Users[indexPath.row].stars != nil){
+//            if(Users[indexPath.row].stars![(Auth.auth().currentUser?.uid)!] == nil){
+//                cell.favoriteBtn.setImage(UIImage(named: "plus"), for: .normal)
+//            }else{
+//                cell.favoriteBtn.setImage(UIImage(named: "heart"), for: .normal)
+//            }
+//        }else{
+//            cell.favoriteBtn.setImage(UIImage(named: "plus"), for: .normal)
+//        }
+        
+        
+        if(Users[indexPath.row].stars![(Auth.auth().currentUser?.uid)!]!){
             cell.favoriteBtn.setImage(UIImage(named: "heart"), for: .normal)
         }else{
             cell.favoriteBtn.setImage(UIImage(named: "plus"), for: .normal)
         }
+ 
         
-
         
         
         return cell
@@ -90,9 +102,17 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 print(error.localizedDescription)
             }
         }
+        
+        if(sender.imageView?.image == UIImage(named: "heart")){
+            sender.setImage(UIImage(named: "plus"), for: .normal)
+        }else{
+            sender.setImage(UIImage(named: "heart"), for: .normal)
+        }
     }
     
     func requestUserData(){
+        Users.removeAll()
+        uID.removeAll()
         // value.key == users의 uID 이므로 allkeys에 대한 각각의 key 를 가져와서 리스트 구성
         DBRef.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
@@ -118,12 +138,28 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 user.userID = child["userID"] as! String
                 user.subject = child["subject"] as! String
                 user.imageURL = child["imageURL"] as! String
+                
+                
                 if(child["stars"] == nil){
-                    user.stars = Dictionary.init(dictionaryLiteral: (user.uID!,false))
+                    user.stars = Dictionary.init(dictionaryLiteral: ((Auth.auth().currentUser?.uid)!,false))
                 }else{
-                    user.stars = child["stars"] as! Dictionary
+                    // 위에 nil 이 아닐때이나, currentUser.uID가 없을때 그냥 넘겨주면 currentUser.uid로 stars값 불러왔을때
+                    // 뻑나요!
+                    
+                    // 그래서 먼저 stars값이 nil 인지 아닌지 검사. nil 이면 false값 가지는 dictionary init()
+                    // 아닐 시 stars의 값을 불러와서 currentUser.uid의 값이 있는지 없는지 검사.
+                    // 있다면 그대로 반환, 없다면 false값 가지는 dictionary init()
+                    let userStarList = child["stars"] as! NSDictionary
+                    if(userStarList[Auth.auth().currentUser?.uid] == nil){
+                        user.stars = Dictionary.init(dictionaryLiteral: ((Auth.auth().currentUser?.uid)!,false))
+                    }else{
+                        user.stars = child["stars"] as! Dictionary
+                    }
                 }
-//                user.starCount = child["starCount"] as! Int
+                
+                
+                
+
                 self.Users.append(user)
             }
             self.uID = value.allKeys as! [String]

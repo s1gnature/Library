@@ -119,8 +119,8 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKq-CW-ZaA">
-                                                    <rect key="frame" x="327" y="148" width="30" height="34"/>
-                                                    <state key="normal" title="🖤"/>
+                                                    <rect key="frame" x="327" y="152" width="30" height="30"/>
+                                                    <state key="normal" image="plus"/>
                                                 </button>
                                             </subviews>
                                         </view>
@@ -296,6 +296,7 @@
     </scenes>
     <resources>
         <image name="home" width="30" height="30"/>
+        <image name="plus" width="30" height="30"/>
         <image name="user_male" width="30" height="30"/>
     </resources>
 </document>
