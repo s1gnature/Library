@@ -17,6 +17,9 @@ PODS:
     - FirebaseAnalytics (= 5.7.0)
   - Firebase/CoreOnly (5.18.0):
     - FirebaseCore (= 5.3.1)
+  - Firebase/Crash (5.18.0):
+    - Firebase/Core
+    - FirebaseCrash (= 3.1.1)
   - Firebase/Database (5.18.0):
     - Firebase/CoreOnly
     - FirebaseDatabase (= 5.1.0)
@@ -40,6 +43,12 @@ PODS:
   - FirebaseAuthInterop (1.0.0)
   - FirebaseCore (5.3.1):
     - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseCrash (3.1.1):
+    - FirebaseAnalytics (~> 5.1)
+    - FirebaseInstanceID (~> 3.2)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - Protobuf (~> 3.5)
   - FirebaseDatabase (5.1.0):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.2)
@@ -65,6 +74,10 @@ PODS:
   - GoogleToolboxForMac/DebugUtils (2.2.0):
     - GoogleToolboxForMac/Defines (= 2.2.0)
   - GoogleToolboxForMac/Defines (2.2.0)
+  - GoogleToolboxForMac/Logger (2.2.0):
+    - GoogleToolboxForMac/Defines (= 2.2.0)
+  - "GoogleToolboxForMac/NSData+zlib (2.2.0)":
+    - GoogleToolboxForMac/Defines (= 2.2.0)
   - "GoogleToolboxForMac/NSDictionary+URLArguments (2.2.0)":
     - GoogleToolboxForMac/DebugUtils (= 2.2.0)
     - GoogleToolboxForMac/Defines (= 2.2.0)
@@ -95,11 +108,13 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - Protobuf (3.7.0)
 
 DEPENDENCIES:
   - FBSDKLoginKit
   - Firebase/Auth
   - Firebase/Core
+  - Firebase/Crash
   - Firebase/Database
   - Firebase/Storage
   - GoogleSignIn
@@ -114,6 +129,7 @@ SPEC REPOS:
     - FirebaseAuth
     - FirebaseAuthInterop
     - FirebaseCore
+    - FirebaseCrash
     - FirebaseDatabase
     - FirebaseInstanceID
     - FirebaseStorage
@@ -124,6 +140,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - Protobuf
 
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
@@ -134,6 +151,7 @@ SPEC CHECKSUMS:
   FirebaseAuth: d85d052354447f30b4b2a805ab91b511458b56a6
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: 52f851b30e11360f1e67cf04b1edfebf0a47a2d3
+  FirebaseCrash: 011365f2c0dfac64315109103ed350bacfcdc03f
   FirebaseDatabase: 23acb0c53cd4d4070a427b60100b2e4aaa97c45d
   FirebaseInstanceID: bd6fc5a258884e206fd5c474ebe4f5b00e21770e
   FirebaseStorage: 29075f874c2b3cf61e5221a62c4ceefc809e5412
@@ -144,7 +162,8 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
 
-PODFILE CHECKSUM: f04edf7d3d75669fdf2e59d92acf1520bf63a4cf
+PODFILE CHECKSUM: 0f0741ba02b024a7d733231b07bd37164eaf8d89
 
 COCOAPODS: 1.5.3

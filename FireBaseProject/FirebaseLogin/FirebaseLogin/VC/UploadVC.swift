@@ -74,18 +74,26 @@ class UploadVC: UIViewController, UIImagePickerControllerDelegate,UINavigationCo
                     "starCount": 0
                     ])
             }
-        }
-        
-        
-        
-        
-        
             let alert = UIAlertController.init(title: "", message: "전송 완료🥰", preferredStyle: .alert)
             let ok = UIAlertAction.init(title: "확인", style: .default, handler: {(_) in
                 self.dismiss(animated: true, completion: nil)
             })
             alert.addAction(ok)
             self.present(alert, animated: true, completion: nil)
+            
+            
+        }
+        
+        
+        
+        
+        
+//            let alert = UIAlertController.init(title: "", message: "전송 완료🥰", preferredStyle: .alert)
+//            let ok = UIAlertAction.init(title: "확인", style: .default, handler: {(_) in
+//                self.dismiss(animated: true, completion: nil)
+//            })
+//            alert.addAction(ok)
+//            self.present(alert, animated: true, completion: nil)
         
     }
     

@@ -14,6 +14,9 @@ import FBSDKLoginKit
 
 class ViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButtonDelegate {
     
+    @IBAction func SegueBtn(_ sender: Any) {
+        self.performSegue(withIdentifier: "LoginSegue", sender: self)
+    }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult?, error: Error!) {
 //        print(result!.token.tokenString)
@@ -95,11 +98,12 @@ class ViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButtonDel
         GIDSignIn.sharedInstance().uiDelegate = self
         FBLoginBtn.delegate = self
         
-        Auth.auth().addStateDidChangeListener({ (user, err) in
-            if user != nil{
-                self.performSegue(withIdentifier: "LoginSegue", sender: self)
-            }
-        } )
+        
+//        Auth.auth().addStateDidChangeListener({ (user, err) in
+//            if user != nil{
+//                self.performSegue(withIdentifier: "LoginSegue", sender: self)
+//            }
+//        } )
         
     }
     override func viewDidAppear(_ animated: Bool) {

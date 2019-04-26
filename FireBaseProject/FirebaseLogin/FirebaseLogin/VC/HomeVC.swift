@@ -28,8 +28,25 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         cell.subjectLabel.text = Users[indexPath.row].subject!
         cell.explanationLabel.text = Users[indexPath.row].explanation!
         print(Users[indexPath.row].uID!)
-        let data = try? Data(contentsOf: URL(string: Users[indexPath.row].imageURL!)!)
-        cell.imageView.image = UIImage(data: data!)
+        
+        let imageURL: URL = URL(string: Users[indexPath.row].imageURL!)!
+        let session: URLSession = URLSession(configuration: .default)
+        let dataTask: URLSessionDataTask = session.dataTask(with: imageURL) {(data: Data?, response: URLResponse?, error: Error?) in
+            
+            if let error = error{
+                print(error.localizedDescription)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                cell.imageView.image = UIImage(data: data!)
+            }
+            
+        }
+        dataTask.resume()
+        
+//        let data = try? Data(contentsOf: URL(string: Users[indexPath.row].imageURL!)!)
+//        cell.imageView.image = UIImage(data: data!)
 
         cell.favoriteBtn.tag = indexPath.row
         cell.favoriteBtn.addTarget(self, action: #selector(like(_:)), for: .touchUpInside)
@@ -119,9 +136,13 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 print("####Error: deleteImage")
             }else{
                 print("####Success: CompleteDeleteImage")
+                // DB파일은 제일 마지막에 삭제해야지 storage에 있는 파일 경로를 DB에서 읽어올 수 있음.
+                // 간혹 통신상 문제로 storage 삭제 중 끊기는 경우가 있으므로 storage에서 삭제 완료 후 DB를 삭제해줌.
+                // 밖에다 빼버리면 Storage삭제 중 error발생 시 storage 파일이 남아있는채로 DB파일 삭제를 시도하기때문에 안전X
+                DBRef.child("users").child(self.uID[sender.tag]).removeValue()
             }
         })
-         DBRef.child("users").child(uID[sender.tag]).removeValue()
+        
         
         self.collectionView.reloadSections(IndexSet(0...0))
 //        requestUserData()
@@ -178,11 +199,11 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 }
 
                 self.Users.append(user)
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
             }
             self.uID = value.allKeys as! [String]
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
             
         })
     }
