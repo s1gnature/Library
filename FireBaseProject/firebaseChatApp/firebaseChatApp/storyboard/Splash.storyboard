@@ -61,7 +61,7 @@
                                     <constraint firstAttribute="width" constant="80" id="JOC-8P-qYG"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vab-T0-qtT" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test@firebase.com" borderStyle="bezel" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vab-T0-qtT" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="30" y="300" width="315" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="dc4-Ax-33f"/>
@@ -78,7 +78,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uev-8U-rPn" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456789" borderStyle="bezel" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uev-8U-rPn" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="30" y="345" width="315" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="jSm-DN-hHT"/>
@@ -111,6 +111,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBound" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="LoginBtn:" destination="nSH-f1-nMZ" eventType="touchUpInside" id="DiF-uR-Dyj"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P92-QA-PCr">
                                 <rect key="frame" x="30" y="440" width="315" height="30"/>
@@ -157,6 +160,10 @@
                         <viewLayoutGuide key="safeArea" id="ip3-BL-x1g"/>
                     </view>
                     <navigationItem key="navigationItem" id="S7B-Nr-1Wz"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="vab-T0-qtT" id="V4f-mC-7yu"/>
+                        <outlet property="passwordTextField" destination="uev-8U-rPn" id="yd7-HC-573"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yu8-1x-RgE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
