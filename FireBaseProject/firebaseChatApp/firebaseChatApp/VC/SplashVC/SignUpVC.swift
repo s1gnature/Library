@@ -101,7 +101,8 @@ class SignUpVC: UIViewController, UINavigationControllerDelegate, UIImagePickerC
                     DBRef.child("ChatDB").child("users").child(uid!).setValue([
                         "name":self.nameTextField.text,
                         "email":self.emailTextField.text,
-                        "profileImageURL":url?.absoluteString
+                        "profileImageURL":url?.absoluteString,
+                        "uid":Auth.auth().currentUser?.uid
                         ])
                 }
             }

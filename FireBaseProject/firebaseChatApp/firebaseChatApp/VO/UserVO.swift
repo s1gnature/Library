@@ -13,4 +13,5 @@ class userVO: NSObject {
     var userName: String?
     var profileURL: String?
     var email: String?
+    var uid: String?
 }

@@ -39,8 +39,12 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
-    
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let chatVC = storyboard?.instantiateViewController(withIdentifier: "ChattingVC") as! ChattingVC
+        chatVC.partnerUid = userList[indexPath.row].uid
+        self.navigationController?.pushViewController(chatVC, animated: true)
+    }
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -51,11 +55,19 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             self.userList.removeAll()
             let uidList = snapshot.value as! NSDictionary
             for key in uidList.allKeys{
+                
+                // login한 본인일 경우 list에서 뺌.
+                let uid = key as! String
+                if(Auth.auth().currentUser?.uid == uid){
+                    continue
+                }
+                
                 let userInfo = uidList[key] as! NSDictionary
                 let userModel = userVO()
                 userModel.userName = userInfo["name"] as! String
                 userModel.email = userInfo["email"] as! String
                 userModel.profileURL = userInfo["profileImageURL"] as! String
+                userModel.uid = userInfo["uid"] as! String
                 self.userList.append(userModel)
             }
             

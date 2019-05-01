@@ -73,7 +73,6 @@
                                             <outlet property="userEmail" destination="lPb-Ip-xBc" id="TjD-qj-DTJ"/>
                                             <outlet property="userImageView" destination="q28-M3-lUH" id="Ocg-5R-gJX"/>
                                             <outlet property="userName" destination="I0R-BL-U3Q" id="VUt-Sn-cRZ"/>
-                                            <segue destination="UpR-ya-VSq" kind="show" id="kho-Mj-pS0"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -104,13 +103,79 @@
                     <view key="view" contentMode="scaleToFill" id="OZ6-r7-aIV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="mgA-CR-fhL">
+                                <rect key="frame" x="5" y="632" width="365" height="30"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ciu-Ov-r12">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nqe-ya-r8T">
+                                        <rect key="frame" x="315" y="0.0" width="50" height="30"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="v5H-AP-aUK"/>
+                                        </constraints>
+                                        <state key="normal" title="Send"/>
+                                        <connections>
+                                            <action selector="sendBtn:" destination="UpR-ya-VSq" eventType="touchUpInside" id="tdK-XL-hGV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="u5K-Ik-Yev"/>
+                                </constraints>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZzF-wW-vbH">
+                                <rect key="frame" x="0.0" y="20" width="375" height="612"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="messageCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="messageCell" rowHeight="70" id="JUw-3d-Pwk" customClass="messageCell" customModule="firebaseChatApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JUw-3d-Pwk" id="ohF-q4-OPd">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRW-AB-UAv">
+                                                    <rect key="frame" x="15" y="24" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="messageLabel" destination="wRW-AB-UAv" id="s7q-yn-6up"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="uMk-Zj-a1Z" firstAttribute="bottom" secondItem="mgA-CR-fhL" secondAttribute="bottom" constant="5" id="FAN-dr-Y6n"/>
+                            <constraint firstItem="uMk-Zj-a1Z" firstAttribute="trailing" secondItem="ZzF-wW-vbH" secondAttribute="trailing" id="Gy8-UT-x9r"/>
+                            <constraint firstItem="mgA-CR-fhL" firstAttribute="leading" secondItem="uMk-Zj-a1Z" secondAttribute="leading" constant="5" id="L1r-Yc-Rwr"/>
+                            <constraint firstItem="mgA-CR-fhL" firstAttribute="top" secondItem="ZzF-wW-vbH" secondAttribute="bottom" id="L9Q-9A-gQ0"/>
+                            <constraint firstItem="ZzF-wW-vbH" firstAttribute="top" secondItem="uMk-Zj-a1Z" secondAttribute="top" id="f82-AP-Bs3"/>
+                            <constraint firstItem="uMk-Zj-a1Z" firstAttribute="trailing" secondItem="mgA-CR-fhL" secondAttribute="trailing" constant="5" id="mPK-gn-euw"/>
+                            <constraint firstItem="ZzF-wW-vbH" firstAttribute="leading" secondItem="uMk-Zj-a1Z" secondAttribute="leading" id="tH9-SY-ENb"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="uMk-Zj-a1Z"/>
                     </view>
+                    <connections>
+                        <outlet property="chatTextField" destination="ciu-Ov-r12" id="yYw-R5-tZF"/>
+                        <outlet property="tableView" destination="ZzF-wW-vbH" id="byZ-vJ-8c4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qNa-J2-u8R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2442" y="-99"/>
+            <point key="canvasLocation" x="2440.8000000000002" y="-99.400299850074973"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="B8b-fO-ab8">
