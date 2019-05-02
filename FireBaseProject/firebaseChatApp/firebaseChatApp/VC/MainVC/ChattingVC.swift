@@ -12,6 +12,7 @@ import Firebase
 
 class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet var textFieldBottomConstraint: NSLayoutConstraint!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var chatTextField: UITextField!
     @IBAction func sendBtn(_ sender: Any) {
@@ -29,22 +30,93 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var chatRoomUid: String?
     
     var commentList: [comment] = []
-    
+    var userValue: userVO?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("##commentListCount"+"\(commentList.count)")
         return commentList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as! messageCell
-        cell.messageLabel.text = commentList[indexPath.row].message
-        return cell
+        if(self.commentList[indexPath.row].uid == uid){
+            let cell = tableView.dequeueReusableCell(withIdentifier: "myMessageCell", for: indexPath) as! myMessageCell
+            cell.messageLabel.text = commentList[indexPath.row].message
+            print("##Message?: "+cell.messageLabel.text!)
+            cell.messageLabel.numberOfLines = 0
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "partnerMessageCell", for: indexPath) as! partnerMessageCell
+            cell.messageLabel.text = commentList[indexPath.row].message
+            cell.messageLabel.numberOfLines = 0
+            cell.nameLabel.text = userValue?.userName
+            print("##partnerMessage?: "+cell.messageLabel.text!)
+            
+            
+//            guard let imageData: Data = try? Data(contentsOf: URL(string: (userValue?.profileURL)!)!) else{
+//                cell.profileImageView.image = UIImage(named: "user")
+//                return cell
+//            }
+//            cell.profileImageView.image = UIImage(data: imageData)
+            cell.profileImageView.image = UIImage(named: "user")
+            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.height/2
+            cell.profileImageView.layer.masksToBounds = true
+            return cell
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    
+    // keyboardLayoutConstraint
+    @objc func keyboardWillShow(notification: Notification){
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            self.textFieldBottomConstraint.constant = keyboardSize.height
+        }
+        
+        UIView.animate(withDuration: 0, animations: {
+            self.view.layoutIfNeeded()
+            }, completion: { (completion) in
+                if self.commentList.count > 0 {
+                    self.tableView.scrollToRow(at: IndexPath(item: self.commentList.count - 1, section: 0), at: .bottom, animated: true)
+                }
+        })
+    }
+    @objc func keyboardWillHide(notification: Notification){
+        self.textFieldBottomConstraint.constant = 5
+        
+        UIView.animate(withDuration: 0, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: { (completion) in
+            
+        })
+    }
+    @objc func dismissKeyboard(){
+        self.view.endEditing(true)
+    }
+    
+    
+    // getUser & Partner's Value
+    func getPartnerInfo(){
+        Database.database().reference().child("ChatDB").child("ChatRoom").child(self.partnerUid!).observeSingleEvent(of: .value, with: { (snapshot) in
+            self.userValue = userVO()
+            guard let value = snapshot.value as? NSDictionary else{
+                return
+            }
+            
+            self.userValue?.email = value["email"] as! String
+            self.userValue?.userName = value["name"] as! String
+            self.userValue?.profileURL = value["profileImageURL"] as! String
+            self.userValue?.uid = value["uid"] as! String
+//            self.getMessageList()
+        })
     }
     
     func getMessageList(){
         Database.database().reference().child("ChatDB").child("ChatRoom").child(self.chatRoomUid!).child("Comments").observe(.value, with: { (snapshot) in
             
-            self.commentList.removeAll()
+            // removeAll 사용하면 말풍선 1개씩밖에 안나와져벌임.
+//            self.commentList.removeAll()
         
             guard let value = snapshot.value as? NSDictionary else{
                 return
@@ -90,7 +162,9 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     "uid" : uid!,
                     "message" : chatTextField.text!
             ]
-            Database.database().reference().child("ChatDB").child("ChatRoom").child(chatRoomUid!).child("Comments").setValue(value)
+            Database.database().reference().child("ChatDB").child("ChatRoom").child(chatRoomUid!).child("Comments").setValue(value, withCompletionBlock: { (err, ref) in
+                self.chatTextField.text! = ""
+            })
         }
     }
     
@@ -104,13 +178,24 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         Database.database().reference().child("ChatDB").child("ChatRoom").queryOrdered(byChild: "userList/"+uid!).queryEqual(toValue: true).observeSingleEvent(of: .value, with: { (snapshot) in
             for item in snapshot.children.allObjects as! [DataSnapshot]{
                 self.chatRoomUid = item.key
+                self.getPartnerInfo()
                 self.getMessageList()
             }
         })
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        // add KeyboardShowHide observer
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+        
+        // remove observer
+        NotificationCenter.default.removeObserver(self)
+    }
     
     override func viewDidLoad() {
         uid  = Auth.auth().currentUser?.uid
@@ -118,9 +203,11 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         isChatRoomExist()
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.tableView.allowsSelection = false
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
-    }
+    
     
 }
