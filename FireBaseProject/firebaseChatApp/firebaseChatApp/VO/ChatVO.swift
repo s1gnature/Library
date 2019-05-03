@@ -13,9 +13,10 @@ class ChatVO: NSObject {
     public var userList: Dictionary<String,Bool> = [:]
     public var commentList: Dictionary<String,comment> = [:]
     
-    public var comment: comment?
+    public var Comments: comment?
 }
 class comment: NSObject {
     public var uid: String?
     public var message: String?
+    public var timestamp: NSNumber?
 }

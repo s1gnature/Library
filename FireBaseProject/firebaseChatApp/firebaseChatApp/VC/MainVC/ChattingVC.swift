@@ -20,9 +20,10 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         print("####: " + "\(chatRoomUid)")
     }
     /*
-     MARK:: 이거 구문 순서가 sendBtn -> CreatRoom 하고 chatRoomUid == nil 일때 isChatRoomExist 불러주고
+     MARK:: sendBtn 후에 방만 생성되고 message가 안 올라가짐. 한번 더 눌러줘야 upload가 되는데 오또카지..
+     이거 구문 순서가 sendBtn -> CreatRoom 하고 chatRoomUid == nil 일때 isChatRoomExist 불러주고
      chatRoomUid 불러와도 nil임. CreatRoom이 다 끝나고 난뒤에 isChatRoomExist가 불러와지는데 이러면
-     sendBtn 후에 방만 생성되고 message가 안 올라가짐. 한번 더 눌러줘야 upload가 되는데 오또카지..
+     send버튼 누를때 방 없을시 생성, 그뒤로 아무행동안함. 다시 한번 더 눌러야지 message 전송. 총 2번 눌러야함
      */
     
     var partnerUid: String?
@@ -43,6 +44,11 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.messageLabel.text = commentList[indexPath.row].message
             print("##Message?: "+cell.messageLabel.text!)
             cell.messageLabel.numberOfLines = 0
+            
+            if let time = self.commentList[indexPath.row].timestamp{
+                cell.timestampLabel.text = time.getCurrentTime
+            }
+            
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "partnerMessageCell", for: indexPath) as! partnerMessageCell
@@ -50,6 +56,10 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.messageLabel.numberOfLines = 0
             cell.nameLabel.text = userValue?.userName
             print("##partnerMessage?: "+cell.messageLabel.text!)
+            
+            if let time = self.commentList[indexPath.row].timestamp{
+                cell.timestampLabel.text = time.getCurrentTime
+            }
             
             
 //            guard let imageData: Data = try? Data(contentsOf: URL(string: (userValue?.profileURL)!)!) else{
@@ -71,7 +81,7 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // keyboardLayoutConstraint
     @objc func keyboardWillShow(notification: Notification){
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            self.textFieldBottomConstraint.constant = keyboardSize.height
+            self.textFieldBottomConstraint.constant = keyboardSize.height + 5
         }
         
         UIView.animate(withDuration: 0, animations: {
@@ -124,6 +134,7 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             var tmpComment = comment()
             tmpComment.message = value["message"] as! String
             tmpComment.uid = value["uid"] as! String
+            tmpComment.timestamp = value["timestamp"] as! NSNumber
             self.commentList.append(tmpComment)
             
             self.tableView.reloadData()
@@ -158,9 +169,12 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
            
         }
         else{
+//            ServerValue.timestamp()
+            let timestamp = NSDate().timeIntervalSince1970
             let value: Dictionary<String,Any> = [
-                    "uid" : uid!,
-                    "message" : chatTextField.text!
+                "uid" : uid!,
+                "message" : chatTextField.text!,
+                "timestamp" : timestamp
             ]
             Database.database().reference().child("ChatDB").child("ChatRoom").child(chatRoomUid!).child("Comments").setValue(value, withCompletionBlock: { (err, ref) in
                 self.chatTextField.text! = ""
@@ -177,9 +191,18 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // 즉 DB에서 currentUser.uid를 탐색, 그 중 true 값인 방을 찾아서 chatRoomUid 반환.
         Database.database().reference().child("ChatDB").child("ChatRoom").queryOrdered(byChild: "userList/"+uid!).queryEqual(toValue: true).observeSingleEvent(of: .value, with: { (snapshot) in
             for item in snapshot.children.allObjects as! [DataSnapshot]{
-                self.chatRoomUid = item.key
-                self.getPartnerInfo()
-                self.getMessageList()
+                if let chatRoomdic = item.value as? NSDictionary{
+                    print(chatRoomdic)
+                    let userList = chatRoomdic["userList"] as! NSDictionary
+                    print(userList)
+                    let partnerUidValue = userList[self.partnerUid] as? Bool
+                    if (partnerUidValue == true) {
+                        self.chatRoomUid = item.key
+                        self.getPartnerInfo()
+                        self.getMessageList()
+                    }
+                }
+            
             }
         })
     }
@@ -201,6 +224,7 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         uid  = Auth.auth().currentUser?.uid
         self.tabBarController?.tabBar.isHidden = true
         isChatRoomExist()
+        self.commentList.removeAll()
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.allowsSelection = false
@@ -208,6 +232,19 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
-    
-    
+}
+
+/*
+  MARK:: 강의에서는 Int에다가 extension으로 주고, 시간을 Firebase서버의 값인 ServerValue.timestamp() 로 받아와서 cell에 뿌려줬음.
+  그렇게 하니까 getMessageList() 메소드가 여러번 불러와져서 같은 메세지를 여러번 append 시켜버려서 tableView에 뿌려주더라. -> 이유는 아직 모르겠음.....
+  그래서 Xcode 자체에서 시간을 불러와서 DB로 보내버렸음. 그리고 그 값을 가져와서 Date에다가 넘겨줘서 시간을 뿌려버림.
+*/
+extension NSNumber{
+    var getCurrentTime: String{
+        let dateFomatter = DateFormatter()
+        dateFomatter.locale = Locale(identifier: "ko_KR")
+        dateFomatter.dateFormat = "yyyy.MM.dd HH:mm"
+        let date = Date(timeIntervalSince1970: TimeInterval(TimeInterval(self)))
+        return dateFomatter.string(from: date)
+    }
 }

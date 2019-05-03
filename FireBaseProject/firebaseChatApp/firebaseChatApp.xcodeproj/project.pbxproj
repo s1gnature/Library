@@ -12,6 +12,8 @@
 		FA1625D52276BC5F0090A614 /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA1625D42276BC5F0090A614 /* RemoteConfigDefaults.plist */; };
 		FA1625D72276BD1A0090A614 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1625D62276BD1A0090A614 /* Splash.storyboard */; };
 		FA6ABDD0227AB2C900FE6A28 /* partnerMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6ABDCF227AB2C900FE6A28 /* partnerMessageCell.swift */; };
+		FA6ABDD2227C0D5200FE6A28 /* chatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6ABDD1227C0D5200FE6A28 /* chatListVC.swift */; };
+		FA6ABDD4227C0D6700FE6A28 /* chatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6ABDD3227C0D6700FE6A28 /* chatListCell.swift */; };
 		FA8A4A4522783EA300CACE35 /* UserVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A4A4422783EA300CACE35 /* UserVO.swift */; };
 		FA8A4A4922783F7000CACE35 /* InfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A4A4822783F7000CACE35 /* InfoVC.swift */; };
 		FA8A4A4B2278401100CACE35 /* userTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A4A4A2278401100CACE35 /* userTableViewCell.swift */; };
@@ -35,6 +37,8 @@
 		FA1625D42276BC5F0090A614 /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		FA1625D62276BD1A0090A614 /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		FA6ABDCF227AB2C900FE6A28 /* partnerMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = partnerMessageCell.swift; sourceTree = "<group>"; };
+		FA6ABDD1227C0D5200FE6A28 /* chatListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatListVC.swift; sourceTree = "<group>"; };
+		FA6ABDD3227C0D6700FE6A28 /* chatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatListCell.swift; sourceTree = "<group>"; };
 		FA8A4A4422783EA300CACE35 /* UserVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVO.swift; sourceTree = "<group>"; };
 		FA8A4A4822783F7000CACE35 /* InfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoVC.swift; sourceTree = "<group>"; };
 		FA8A4A4A2278401100CACE35 /* userTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userTableViewCell.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 				FA8A4A5022798A7200CACE35 /* myMessageCell.swift */,
 				FA6ABDCF227AB2C900FE6A28 /* partnerMessageCell.swift */,
 				FA8A4A4822783F7000CACE35 /* InfoVC.swift */,
+				FA6ABDD1227C0D5200FE6A28 /* chatListVC.swift */,
+				FA6ABDD3227C0D6700FE6A28 /* chatListCell.swift */,
 			);
 			path = MainVC;
 			sourceTree = "<group>";
@@ -301,6 +307,8 @@
 				FA9A71C22276B6430038A965 /* AppDelegate.swift in Sources */,
 				FAC948872276C74B0021B495 /* LoginVC.swift in Sources */,
 				FA8A4A4F22795DCB00CACE35 /* ChatVO.swift in Sources */,
+				FA6ABDD4227C0D6700FE6A28 /* chatListCell.swift in Sources */,
+				FA6ABDD2227C0D5200FE6A28 /* chatListVC.swift in Sources */,
 				FA8A4A4B2278401100CACE35 /* userTableViewCell.swift in Sources */,
 				FAC948892276D1B30021B495 /* SignUpVC.swift in Sources */,
 				FA1625D32276BBF00090A614 /* SplashVC.swift in Sources */,
