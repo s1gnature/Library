@@ -1,0 +1,16 @@
+chatBubbleAutoLayout
+
+챗 버블 만들때 textfield 길이를 가변적으로 하려면?
+
+#textField constraint
+먼저 textField 의 line = 0 으로 주고 오토레이아웃 줄 때 위, 아래 값 주고
+좌, 우 값은 greater than 으로 지정해서 최소한의 레이아웃 빈 공간을 설정하고 늘어날 수 있게 설정함.
+이 말이 무엇이냐, 만약 위,아래,좌 값을 5로 주고 오른쪽 길이를 message 길이에 맞춰 늘리고 싶으면
+constraint 값을 뭐,, 오른쪽 constraint 값을 50으로 주면 그 50에 해당하는 값 이하로는 message가 줄바꿈을
+하지 않음! 즉 평소에는 message의 context 만큼 감싸게 constraint값을 알아서 늘려버림. 그러나 길이가 너무
+길어진다 싶으면 50에 해당하는 곳까지 text 보여주고 그 다음 message들은 줄바꿈 시켜버림.
+
+#messageBubbleImageView constraint
+그러고 나면 messageBubbleImageView를 textField에 맞게 resize를 해줘야 하는데
+먼저 imageView의 top, bottom, leading, trailling을 textField의 각각의 값에 딱 맞게 맞춰줌!! -> 이러면 어떻게 되느냐, textField가 줄바꿈을 하던, message길이가 늘어나서 좌우 constraint값이 바뀌어도 
+imageView가 그걸 캐치해서 이미지를 늘리고 줄여버림. 이쁘게 만들고 싶으면 딱 맞추지 말고 값을 -,+ 해줘서 이쁘게 만들면 됨. 
