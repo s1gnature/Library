@@ -11,6 +11,11 @@ import AVFoundation
 
 class ViewController: UIViewController, AVAudioPlayerDelegate {
 
+    
+    @IBOutlet var playPauseButton: UIButton!
+    @IBOutlet var progressSlider: UISlider!
+    @IBOutlet var timeLabel: UILabel!
+    
     var player: AVAudioPlayer!
     var timer: Timer!
     
@@ -31,7 +36,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         self.progressSlider.minimumValue = 0
         self.progressSlider.value = Float(self.player.currentTime)
     }
-    // MARK: TEST -> 메소드 사이에서 마킹을 해서 구분 가능하게함.
+    
     
     func updateTimeLabelText(time: TimeInterval){
         let minute: Int = Int(time/60)
@@ -50,10 +55,16 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
             
             self.updateTimeLabelText(time: self.player.currentTime)
             self.progressSlider.value = Float(self.player.currentTime)
+            
+            // 재생 아닐때 항상 버튼 deSelected로 해두면 이미지 알아서 바뀜.
+            if (!self.player.isPlaying){
+                self.playPauseButton.isSelected = false
+                
+            }
         })
         self.timer.fire()
         
-        // 끝났을때 pause 버튼이 play 버튼으로 안바뀜...
+        
         if (self.progressSlider.value == self.progressSlider.maximumValue){
             self.player.pause()
         }
@@ -63,16 +74,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         self.timer = nil
     }
     
-    
-    @IBOutlet var playPauseButton: UIButton!
-    @IBOutlet var progressSlider: UISlider!
-    @IBOutlet var timeLabel: UILabel!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.initializePlayer()
-    }
+
 
     @IBAction func touchPlayPause_Btn(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -95,5 +97,12 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         self.player.currentTime = TimeInterval(sender.value)
     }
     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        self.initializePlayer()
+        
+    }
 }
 
