@@ -14,5 +14,6 @@ class myMessageCell: UITableViewCell {
     @IBOutlet var messageLabel: UILabel!
     @IBOutlet var messageImageView: UIImageView!
     @IBOutlet var timestampLabel: UILabel!
+    @IBOutlet var readUserCntLabel: UILabel!
     
 }

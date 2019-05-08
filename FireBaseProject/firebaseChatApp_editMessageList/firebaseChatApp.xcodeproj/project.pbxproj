@@ -40,6 +40,7 @@
 		FA6ABDD1227C0D5200FE6A28 /* chatListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatListVC.swift; sourceTree = "<group>"; };
 		FA6ABDD3227C0D6700FE6A28 /* chatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatListCell.swift; sourceTree = "<group>"; };
 		FA6ABDD5227D5FA000FE6A28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FA6ABDD7228005AE00FE6A28 /* firebaseChatApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = firebaseChatApp.entitlements; sourceTree = "<group>"; };
 		FA8A4A4422783EA300CACE35 /* UserVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVO.swift; sourceTree = "<group>"; };
 		FA8A4A4822783F7000CACE35 /* InfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoVC.swift; sourceTree = "<group>"; };
 		FA8A4A4A2278401100CACE35 /* userTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userTableViewCell.swift; sourceTree = "<group>"; };
@@ -140,6 +141,7 @@
 		FA9A71C02276B6430038A965 /* firebaseChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				FA6ABDD7228005AE00FE6A28 /* firebaseChatApp.entitlements */,
 				FA8A4A4322783E9700CACE35 /* VO */,
 				FA9A71D62276B7C20038A965 /* storyboard */,
 				FA9A71D52276B7BB0038A965 /* VC */,
@@ -204,6 +206,14 @@
 				TargetAttributes = {
 					FA9A71BD2276B6430038A965 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};

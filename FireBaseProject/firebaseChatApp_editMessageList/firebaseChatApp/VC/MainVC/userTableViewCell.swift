@@ -13,5 +13,6 @@ class userTableViewCell: UITableViewCell{
     @IBOutlet var userImageView: UIImageView!
     @IBOutlet var userName: UILabel!
     @IBOutlet var userEmail: UILabel!
+    @IBOutlet var stateMessage: UILabel!
     
 }

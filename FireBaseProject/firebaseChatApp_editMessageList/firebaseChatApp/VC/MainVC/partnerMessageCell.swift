@@ -15,5 +15,6 @@ class partnerMessageCell: UITableViewCell {
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var timestampLabel: UILabel!
+    @IBOutlet var readUserCntLabel: UILabel!
     
 }

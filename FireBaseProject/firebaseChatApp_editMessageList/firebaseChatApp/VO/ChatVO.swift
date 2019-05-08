@@ -20,4 +20,6 @@ class comment: NSObject {
     public var uid: String?
     public var message: String?
     public var timestamp: NSNumber?
+    public var readUsers: Dictionary<String,Bool> = [:]
+    //    public var readUsers: NSDictionary<String,Bool> = [:]
 }

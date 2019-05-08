@@ -29,11 +29,15 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var partnerUid: String?
     var uid: String?
     var chatRoomUid: String?
+    var partnerProfileImage: UIImage?
     
     var commentUid: [String] = []
     var commentList: [comment] = []
     var commentDic = ChatVO().commentList
     var userValue: userVO?
+    
+    var DBRef: DatabaseReference?
+    var observe: UInt?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return commentList.count
@@ -45,6 +49,20 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "myMessageCell", for: indexPath) as! myMessageCell
             cell.messageLabel.text = commentList[indexPath.row].message
             cell.messageLabel.numberOfLines = 0
+            
+            Database.database().reference().child("DB_edit").child("ChatRoom").child(chatRoomUid!).child("userList").observeSingleEvent(of: .value, with: { (snapshot) in
+                let userList = snapshot.value as! NSDictionary
+                
+                let readCnt = userList.count - self.commentList[indexPath.row].readUsers.count
+                if(readCnt > 0){
+                    cell.readUserCntLabel.isHidden = false
+                    cell.readUserCntLabel.text = "\(readCnt)"
+                }else{
+                    cell.readUserCntLabel.isHidden = true
+                }
+            })
+
+            
             
             if let time = self.commentList[indexPath.row].timestamp{
                 cell.timestampLabel.text = time.getCurrentTime
@@ -62,14 +80,26 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
             
             
-//            guard let imageData: Data = try? Data(contentsOf: URL(string: (userValue?.profileURL)!)!) else{
+            Database.database().reference().child("DB_edit").child("ChatRoom").child(chatRoomUid!).child("userList").observeSingleEvent(of: .value, with: { (snapshot) in
+                let userList = snapshot.value as! NSDictionary
+                
+                let readCnt = userList.count - self.commentList[indexPath.row].readUsers.count
+                if(readCnt > 0){
+                    cell.readUserCntLabel.isHidden = false
+                    cell.readUserCntLabel.text = "\(readCnt)"
+                }else{
+                    cell.readUserCntLabel.isHidden = true
+                }
+            })
+            
+            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.height/2
+            cell.profileImageView.layer.masksToBounds = true
+//            guard let imageData = try? Data(contentsOf: URL(string: (userValue?.profileURL)!)!) else{
 //                cell.profileImageView.image = UIImage(named: "user")
 //                return cell
 //            }
-//            cell.profileImageView.image = UIImage(data: imageData)
+//            cell.messageImageView.image = UIImage(data: imageData)
             cell.profileImageView.image = UIImage(named: "user")
-            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.height/2
-            cell.profileImageView.layer.masksToBounds = true
             return cell
         }
     }
@@ -108,7 +138,7 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // getUser & Partner's Value
     func getPartnerInfo(){
-        Database.database().reference().child("DB_edit").child("ChatRoom").child(self.partnerUid!).observeSingleEvent(of: .value, with: { (snapshot) in
+        Database.database().reference().child("DB_edit").child("users").child(self.partnerUid!).observeSingleEvent(of: .value, with: { (snapshot) in
             self.userValue = userVO()
             guard let value = snapshot.value as? NSDictionary else{
                 return
@@ -118,12 +148,19 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             self.userValue?.userName = value["name"] as! String
             self.userValue?.profileURL = value["profileImageURL"] as! String
             self.userValue?.uid = value["uid"] as! String
+            
+            guard let imageData = try? Data(contentsOf: URL(string: (self.userValue?.profileURL)!)!) else{
+//                cell.profileImageView.image = UIImage(named: "user")
+                return
+            }
+            self.partnerProfileImage = UIImage(data: imageData)
 //            self.getMessageList()
         })
     }
     
     func getMessageList(){
-        Database.database().reference().child("DB_edit").child("ChatRoom").child(self.chatRoomUid!).child("Comments").observe(.value, with: { (snapshot) in
+       DBRef = Database.database().reference().child("DB_edit").child("ChatRoom").child(self.chatRoomUid!).child("Comments")
+        observe = DBRef!.observe(.value, with: { (snapshot) in
             
             // removeAll 사용하면 말풍선 1개씩밖에 안나와져벌임.
             self.commentList.removeAll()
@@ -137,13 +174,24 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             var valueKeys = value.allKeys as! [String]
             valueKeys = valueKeys.sorted()
             for key in valueKeys{
-//                let key = item as! String
-//                print(value.allKeys)
+                
                 let tmpComment = comment()
                 let tmpValue = value[key] as! NSDictionary
                 tmpComment.message = tmpValue["message"] as! String
                 tmpComment.uid = tmpValue["uid"] as! String
                 tmpComment.timestamp = tmpValue["timestamp"] as! NSNumber
+                
+        
+                var readUserValue = tmpValue["readUsers"] as! NSDictionary
+                for index in readUserValue{
+                    tmpComment.readUsers.updateValue(index.value as! Bool, forKey: index.key as! String)
+                }
+                
+                // 이거 로그아웃하고 다시 다른 아이디로 들어왔들 때 이전uid, 현재uid 둘 다 읽음 처리로 update된다..
+                tmpComment.readUsers[self.uid!] = true
+                
+                snapshot.ref.child(key).child("readUsers").updateChildValues(tmpComment.readUsers)
+                
                 let tmpDic = [Int(key)!:tmpComment]
                 self.commentUid.append(key)
                 self.commentList.append(tmpComment)
@@ -161,7 +209,9 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         })
     }
     
-    
+    func readUserCnt(){
+        
+    }
     
     
     func creatRoom(){
@@ -172,6 +222,7 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             ]
         ]
    
+        // 채팅방이 없을 시 채팅방 생성
         if(chatRoomUid == nil){
            
             Database.database().reference().child("DB_edit").child("ChatRoom").childByAutoId().setValue(roomInfo, withCompletionBlock: { (err, ref) in
@@ -187,13 +238,17 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             print("##DEBUG : " + "\(chatRoomUid)")
            
         }
+        // 채팅방이 존재할 시 입력한 메세지 DB로 전송
         else{
 //            ServerValue.timestamp()
             let timestamp = NSDate().timeIntervalSince1970
+            let userCnt = Database.database().reference().child("DB_edit").child("ChatRoom").child(chatRoomUid!).child("userList").key?.count
             let value: Dictionary<String,Any> = [
                 "uid" : uid!,
                 "message" : chatTextField.text!,
-                "timestamp" : timestamp
+                "timestamp" : timestamp,
+                "readUsers" : [uid:true]
+                
             ]
             let commentID = Int(timestamp)
             // childByAutoID로 하니까 임의로 생성된 key들이 나중에 allkeys로 불러올때 알파벳 순으로 sort 되어서 불러와짐. -> 메세지 순서가 뒤바뀜
@@ -237,9 +292,11 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
-        
         // remove observer
         NotificationCenter.default.removeObserver(self)
+        
+        // 채팅방에서 나갔을때도 이 옵저버가 백그라운드에서 작동 되므로 getMessageList 에 대한 옵저버를 제거해줌.
+        DBRef?.removeObserver(withHandle: observe!)
     }
     
     override func viewDidLoad() {
@@ -253,6 +310,7 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
+        self.tableView.separatorStyle = .none
     }
 }
 

@@ -19,6 +19,7 @@ class chatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var commentDic = ChatVO().commentList
     var partnerUidList: [String] = []
     
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatList.count
     }

@@ -25,9 +25,9 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         cell.userName.text = userList[indexPath.row].userName
         cell.userEmail.text = userList[indexPath.row].email
-        
-        cell.imageView?.layer.cornerRadius = 30
-        cell.imageView?.clipsToBounds = true
+        cell.stateMessage.text = userList[indexPath.row].stateMessage
+//        cell.imageView?.layer.cornerRadius = 30
+//        cell.imageView?.clipsToBounds = true
         
         guard let imageData: Data = try? Data(contentsOf: URL(string: userList[indexPath.row].profileURL!)!) else {
             cell.imageView?.image = UIImage(named: "user")
@@ -36,13 +36,14 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.imageView?.image = UIImage(data: imageData)
         return cell
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 70
+//    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chatVC = storyboard?.instantiateViewController(withIdentifier: "ChattingVC") as! ChattingVC
         chatVC.partnerUid = userList[indexPath.row].uid
         self.navigationController?.pushViewController(chatVC, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
  
     override func viewDidLoad() {
@@ -68,6 +69,7 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 userModel.email = userInfo["email"] as! String
                 userModel.profileURL = userInfo["profileImageURL"] as! String
                 userModel.uid = userInfo["uid"] as! String
+                userModel.stateMessage = userInfo["stateMessage"] as? String
                 self.userList.append(userModel)
             }
             
@@ -91,6 +93,8 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidAppear(_ animated: Bool) {
 //        self.tableView.reloadSections(IndexSet(0...0), with: .automatic)
     }
-
+    override func viewDidDisappear(_ animated: Bool) {
+        
+    }
 }
 
