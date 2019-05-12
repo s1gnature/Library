@@ -40,6 +40,7 @@ class PhotoListVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     }
     @IBAction func refreshBtn(_ sender: Any) {
         self.photoCollectionView.reloadSections(IndexSet(0...0))
+        deselectAll()
     }
     
     func deselectUI(indexPath: IndexPath){
@@ -161,6 +162,7 @@ class PhotoListVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             self.fetchResult = PHAsset.fetchAssets(in: cameraRollCollection!, options: fetchOptions)
             self.photoCollectionView.reloadSections(IndexSet(0...0))
         }
+        deselectAll()
     }
     func requestCollection(){
         let fetchOptions = PHFetchOptions()
