@@ -320,7 +320,7 @@
             </objects>
             <point key="canvasLocation" x="140" y="132.68365817091455"/>
         </scene>
-        <!--Chat ListVC-->
+        <!--Chats-->
         <scene sceneID="cLU-1K-82H">
             <objects>
                 <viewController storyboardIdentifier="chatListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="99S-Mb-Ffj" customClass="chatListVC" customModule="firebaseChatApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -395,7 +395,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kGy-xa-wyl"/>
                     </view>
-                    <navigationItem key="navigationItem" id="jfp-Zy-ocI"/>
+                    <navigationItem key="navigationItem" title="Chats" id="jfp-Zy-ocI"/>
                     <connections>
                         <outlet property="tableView" destination="dl0-Sw-UZt" id="oM7-PY-mtX"/>
                     </connections>

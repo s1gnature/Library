@@ -154,6 +154,7 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 return
             }
             self.partnerProfileImage = UIImage(data: imageData)
+            self.navigationItem.title = self.userValue?.userName
 //            self.getMessageList()
         })
     }
@@ -311,6 +312,7 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         self.tableView.separatorStyle = .none
+        
     }
 }
 
