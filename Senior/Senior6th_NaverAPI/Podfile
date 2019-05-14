@@ -3,9 +3,9 @@ platform :ios, '11.0'
 use_frameworks!
 target 'Senior6th_NaverAPI' do
 
-    pod 'Alamofire'
+    pod 'Alamofire', '~> 4.7'
     pod 'SwiftyJSON'
-#    pod 'Kingfisher'
-    pod 'ObjectMapper'
-    pod 'AlamofireObjectMapper'
+    pod 'Kingfisher'
+    pod 'ObjectMapper', '~> 3.4'
+    pod 'AlamofireObjectMapper', '~> 5.2'
 end
