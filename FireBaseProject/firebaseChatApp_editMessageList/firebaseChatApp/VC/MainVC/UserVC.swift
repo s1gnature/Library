@@ -30,15 +30,16 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 //        cell.imageView?.clipsToBounds = true
         
         guard let imageData: Data = try? Data(contentsOf: URL(string: userList[indexPath.row].profileURL!)!) else {
-            cell.imageView?.image = UIImage(named: "user")
+            cell.userImageView.image = UIImage(named: "user")
             return cell
         }
-        cell.imageView?.image = UIImage(data: imageData)
+        cell.userImageView.image = UIImage(data: imageData)
         return cell
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 70
-//    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chatVC = storyboard?.instantiateViewController(withIdentifier: "ChattingVC") as! ChattingVC
         chatVC.partnerUid = userList[indexPath.row].uid

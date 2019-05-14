@@ -19,6 +19,8 @@ class chatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var commentDic = ChatVO().commentList
     var partnerUidList: [String] = []
     
+    let tmpView = UIView()
+    
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatList.count
@@ -113,14 +115,20 @@ class chatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     override func viewDidLoad() {
+        tmpView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        tmpView.backgroundColor = UIColor.white
+//        self.view.addSubview(tmpView)
+        
         uid = Auth.auth().currentUser?.uid
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
+    
     override func viewWillAppear(_ animated: Bool) {
+//        tmpView.isHidden = false
         // 여기다가 list를 불러 와야지 채팅방 진입 후 채팅 치고 나왔을 때 최신으로 반영 댐
         getChatRoomList()
+
     }
-    
     
 }
