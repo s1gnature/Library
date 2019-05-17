@@ -43,6 +43,9 @@ class TableViewDetailVC: UIViewController,UIScrollViewDelegate, UITableViewDataS
     var requestView: UIView = UIView.init()
     var indicatorBackground: UIView = UIView.init()
     
+    
+    
+    
     func errorLoadingAlert(title: String, message: String){
         let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let ok: UIAlertAction = UIAlertAction.init(title: "확인", style: .default, handler: {(_) in
@@ -69,6 +72,7 @@ class TableViewDetailVC: UIViewController,UIScrollViewDelegate, UITableViewDataS
         guard let url: URL = URL(string: movieDetailAddress) else { return }
         
         let session: URLSession = URLSession(configuration: .default)
+        
         let dataTask: URLSessionDataTask = session.dataTask(with: url) {(data: Data?, response: URLResponse?, error: Error?) in
             
             // 데이터 통신 성공 or 실패 여부 판단. success code = 200
@@ -89,6 +93,7 @@ class TableViewDetailVC: UIViewController,UIScrollViewDelegate, UITableViewDataS
                 // Decode 할때는 JSON파일 형태 잘 살펴보고 decode해줘야지 에러 안나욧!
                 // 형식이 구조체 형식인지, 단일 형식인지 잘 보고 해야댐. -> VO 파일 참조, 비교
                 let apiResponse: MovieDetail = try JSONDecoder().decode(MovieDetail.self, from: data)
+                
                 self.movieDetails = apiResponse
                 DispatchQueue.main.async {
                     self.requestComment()
@@ -162,6 +167,7 @@ class TableViewDetailVC: UIViewController,UIScrollViewDelegate, UITableViewDataS
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" //Specify your format that you want
         let strDate = dateFormatter.string(from: date)
         cell.date.text = strDate
+        
         return cell
     }
     
@@ -251,6 +257,7 @@ class TableViewDetailVC: UIViewController,UIScrollViewDelegate, UITableViewDataS
         let nextVC: CommentVC = segue.destination as! CommentVC
         nextVC.mtitle = movieTitle.text
         nextVC.grade = movieGrade.image
+        nextVC.movieID = movieID
         print(movieTitle.text)
     }
     override func viewDidLoad() {
@@ -259,6 +266,7 @@ class TableViewDetailVC: UIViewController,UIScrollViewDelegate, UITableViewDataS
          그냥 쌩 하얀색 view 하나 만들어서 screen size 만큼 뿌려줘서 안보이게 가리고 networkingIndicator(ActivityIndicator) 올려놔서
          데이터 불러오는중임을 표시해준다. -> indicatorUI()
         */
+        
         indicatorBackground.isHidden = false
         requestView.isHidden = false
         indicatorUI()
@@ -271,6 +279,7 @@ class TableViewDetailVC: UIViewController,UIScrollViewDelegate, UITableViewDataS
         self.commentTableView.dataSource = self
         self.requestDetail()
         commentTableView.isScrollEnabled = false
+        commentTableView.allowsSelection = false
 
         /*
          3/13 MARK:: 이거 응답 요청할때 process 돌아가는거 user 한테 indicate 해줘야 하는데 그걸 빼먹은거같음.
@@ -281,8 +290,10 @@ class TableViewDetailVC: UIViewController,UIScrollViewDelegate, UITableViewDataS
 
     }
     override func viewWillAppear(_ animated: Bool) {
+        
+        
     }
     override func viewDidAppear(_ animated: Bool) {
-        
+        requestComment()
     }
 }

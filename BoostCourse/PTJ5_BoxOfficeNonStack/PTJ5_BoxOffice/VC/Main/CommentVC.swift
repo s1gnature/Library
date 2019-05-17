@@ -25,11 +25,14 @@ class CommentVC: UIViewController {
     
     var mtitle: String!
     var grade: UIImage!
+    var movieID: String!
+    
     
     @IBAction func cancelBtn(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func writeBtn(_ sender: Any) {
+        
         if ((nicknameTextField.text?.isEmpty)! || (commentTextField.text?.isEmpty)!){
             let alert = UIAlertController.init(title: "", message: "빈칸을 확인해 주세요", preferredStyle: .alert)
             let ok = UIAlertAction.init(title: "확인", style: .default, handler: nil)
@@ -37,6 +40,34 @@ class CommentVC: UIViewController {
             present(alert, animated: true, completion: nil)
         }
         else{
+            
+            // post JSON value
+            var newComment = Comment(rating: starRate.rating, timestamp: Date().timeIntervalSince1970, writer: nicknameTextField.text!, movie_id: movieID, contents: commentTextField.text!)
+
+            guard let uploadData = try? JSONEncoder().encode(newComment) else{
+                return
+            }
+            
+            let commentAddress: String = "https://connect-boxoffice.run.goorm.io/comment"
+            guard let url: URL = URL(string: commentAddress) else { return }
+            var requestURL = URLRequest(url: url)
+            requestURL.httpMethod = "POST"
+            
+            
+            // 이건 왜 ?
+//            requestURL.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let session: URLSession = URLSession(configuration: .default)
+            let dataTask: URLSessionDataTask = session.uploadTask(with: requestURL, from: uploadData, completionHandler: { (data, response, err) in
+                
+                if (err != nil){
+                    print("err")
+                }
+            })
+            dataTask.resume()
+            
+            
+            
             let alert = UIAlertController.init(title: "", message: "한줄평 작성 완료", preferredStyle: .alert)
             let ok = UIAlertAction.init(title: "확인", style: .default, handler: {(_) in
                 self.dismiss(animated: true, completion: nil)
@@ -44,9 +75,13 @@ class CommentVC: UIViewController {
             alert.addAction(ok)
             present(alert, animated: true, completion: nil)
         }
+        
+        
+        
     }
     
     override func viewDidLoad() {
+        
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         print(mtitle)
@@ -71,5 +106,10 @@ class CommentVC: UIViewController {
         statusBarView.backgroundColor = navigationBar.barTintColor
 //        UIApplication.shared.statusBarStyle = .lightContent
 //        self.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+//        let vc: TableViewDetailVC = storyboard?.instantiateViewController(withIdentifier: "TableViewDetailVC") as! TableViewDetailVC
+//        vc.requestComment()
     }
 }

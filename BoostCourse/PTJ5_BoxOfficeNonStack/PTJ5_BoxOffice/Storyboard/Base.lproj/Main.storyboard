@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9BY-Dq-t5Q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9BY-Dq-t5Q">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -127,7 +127,7 @@
         <!--Title-->
         <scene sceneID="Sx7-QJ-Xmd">
             <objects>
-                <viewController id="Gds-gM-IKv" customClass="TableViewDetailVC" customModule="PTJ5_BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TableViewDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gds-gM-IKv" customClass="TableViewDetailVC" customModule="PTJ5_BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jKi-vw-HID">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -138,7 +138,7 @@
                                     <view contentMode="scaleToFill" verticalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="V8p-bi-Vgo" userLabel="ScrollContent">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="2000"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7zH-Sk-OBh">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7zH-Sk-OBh" userLabel="movieDetail">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sSO-er-HaJ">
@@ -309,7 +309,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="EyY-q2-DCD" secondAttribute="trailing" id="zRA-0Q-aFW"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Me2-4z-fuB">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Me2-4z-fuB" userLabel="plot">
                                                 <rect key="frame" x="0.0" y="260" width="375" height="67.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="줄거리" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zY6-I7-tW4">
@@ -336,7 +336,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="vsE-gl-TJB" secondAttribute="trailing" constant="10" id="u46-xF-bae"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iml-ox-Urm">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iml-ox-Urm" userLabel="director">
                                                 <rect key="frame" x="0.0" y="337.5" width="375" height="93"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="감독/출연" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LdC-Qc-reW">
@@ -405,7 +405,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="0bw-ER-BHM" secondAttribute="trailing" constant="8" id="rMt-Kc-adz"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I8h-mb-oQM">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I8h-mb-oQM" userLabel="comment">
                                                 <rect key="frame" x="0.0" y="440.5" width="375" height="1559.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한줄평" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZi-Wd-sq8">
@@ -527,14 +527,14 @@
                                             <constraint firstItem="I8h-mb-oQM" firstAttribute="leading" secondItem="V8p-bi-Vgo" secondAttribute="leading" id="QJi-iM-Tbh"/>
                                             <constraint firstItem="I8h-mb-oQM" firstAttribute="top" secondItem="iml-ox-Urm" secondAttribute="bottom" constant="10" id="UJU-fL-U4G"/>
                                             <constraint firstItem="Me2-4z-fuB" firstAttribute="leading" secondItem="V8p-bi-Vgo" secondAttribute="leading" id="Zpx-gH-qtW"/>
-                                            <constraint firstAttribute="bottom" secondItem="I8h-mb-oQM" secondAttribute="bottom" id="daN-K1-kYr"/>
+                                            <constraint firstAttribute="bottom" secondItem="I8h-mb-oQM" secondAttribute="bottom" priority="250" id="daN-K1-kYr"/>
                                             <constraint firstAttribute="trailing" secondItem="Me2-4z-fuB" secondAttribute="trailing" id="ehX-5Y-0ul"/>
                                             <constraint firstItem="iml-ox-Urm" firstAttribute="top" secondItem="Me2-4z-fuB" secondAttribute="bottom" constant="10" id="gMx-KM-0AU"/>
                                             <constraint firstItem="7zH-Sk-OBh" firstAttribute="leading" secondItem="V8p-bi-Vgo" secondAttribute="leading" id="gWu-hV-ARk"/>
                                             <constraint firstAttribute="trailing" secondItem="I8h-mb-oQM" secondAttribute="trailing" id="hDH-dH-Dh8"/>
                                             <constraint firstAttribute="trailing" secondItem="iml-ox-Urm" secondAttribute="trailing" id="kcJ-A6-rrQ"/>
                                             <constraint firstItem="7zH-Sk-OBh" firstAttribute="top" secondItem="V8p-bi-Vgo" secondAttribute="top" id="l5f-JP-KUN"/>
-                                            <constraint firstAttribute="height" constant="2000" id="ptQ-nT-fIl"/>
+                                            <constraint firstAttribute="height" priority="250" constant="2000" id="ptQ-nT-fIl"/>
                                         </constraints>
                                     </view>
                                 </subviews>
