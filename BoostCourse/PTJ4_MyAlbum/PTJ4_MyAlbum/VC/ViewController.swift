@@ -26,25 +26,56 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
     @IBOutlet var navigationBar: UINavigationItem!
 
     let albumSize: CGFloat = (UIScreen.main.bounds.width / 2.0) - 20.0
-    var fetchAlbum: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
-    var fetchCameraRoll: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)
+    var fetchAlbum: PHFetchResult<PHAssetCollection>!
+    var fetchCameraRoll: PHFetchResult<PHAssetCollection>!
     var fetchResult: PHFetchResult<PHAsset>!
     
     let imageManager: PHCachingImageManager = PHCachingImageManager()
     var selectedIndex: [IndexPath] = []
 
+    let fetchOptions = PHFetchOptions()
+
+    var albumCollection: PHAssetCollection!
+    var thumbnail: PHAsset!
+    func requestPhotos(){
+        fetchAlbum = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
+        fetchCameraRoll = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        albumCollection = self.fetchCameraRoll.firstObject!
+        self.fetchResult = PHAsset.fetchAssets(in: albumCollection, options: fetchOptions)
+        thumbnail = self.fetchResult.lastObject!
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+            self.collectionView.reloadSections(IndexSet(0...0))
+        }
+        
+    }
+    
     func photoAuthoriztion() -> Bool {
         let photoAuthorizationbStatus = PHPhotoLibrary.authorizationStatus()
+        
         
         switch photoAuthorizationbStatus {
         case .authorized:
             print("Access")
+            requestPhotos()
+            collectionView.reloadData()
+            collectionView.reloadSections(IndexSet(0...0))
             return true
             
         case .denied:
             print("Denied")
             return false
         case .notDetermined:
+            PHPhotoLibrary.requestAuthorization({ (status) in
+                switch status {
+                case .authorized:
+                    self.requestPhotos()
+                default:
+                    break
+                }
+            })
             print("Not Response")
             return false
         case .restricted:
@@ -57,7 +88,12 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (self.fetchAlbum.count + 1)
+        if let album = self.fetchAlbum{
+            return album.count + 1
+        }else{
+            return 0
+        }
+//        return (self.fetchAlbum.count + 1)
     }
     
     // collectionViewHeader setting
@@ -88,6 +124,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
          그 이후 album을 indexPath별로 뿌려주려할때 하나씩 밀려 가져온 album의 첫번째 album을 못 불러오는 상황이 발생함.
          cameraRoll을 가져온 이후 album을 가져올때는 indexPath.row - 1 을 해줘서 loss가 안나게 전부 가져올 수 있도록 함.
         */
+        if(fetchCameraRoll.count == 0){
+            return cell
+        }
         switch indexPath.row {
         case 0:
             print(fetchCameraRoll.count)
@@ -147,6 +186,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 //    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
 //        navigationBar.title = ""
 //    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let PhotoListVC = segue.destination as! PhotoListVC
         
@@ -171,37 +212,38 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
     }
 
     override func viewDidLoad() {
-        print(fetchCameraRoll.lastObject?.localizedTitle)
+        photoAuthoriztion()
+//        print(fetchCameraRoll.lastObject?.localizedTitle)
         // Style 에는 alert -> 기본 알람형식, actionSheet -> 아래서 나오는거 로 나눠짐.
-        let enterAlert = UIAlertController.init(title: nil, message: "Correct Password📲", preferredStyle: .actionSheet)
-        let enterIncorrect = UIAlertController.init(title: nil, message: "InCorrect Password🔐", preferredStyle: .actionSheet)
-        let alertView = UIAlertController.init(title: nil, message: "사진 좀 쓸게용🥰", preferredStyle: .alert)
-        
-        let cancel = UIAlertAction.init(title: "시렁😝", style: .cancel, handler: {(_) in self.present(alertView, animated: true, completion: nil)})
-        let permit = UIAlertAction.init(title: "그랭☺️", style: .default, handler:{(_) in
-            enterText = (alertView.textFields?.first?.text)!
-            print(enterText)
-            if (enterText == "ok") {
-                self.present(enterAlert, animated: true, completion: {print("alert Again")})
-            } else{
-                self.present(enterIncorrect, animated: true, completion: {})
-            }
-        })
-        alertView.addAction(cancel)
-        alertView.addAction(permit)
-        
-        let enterOk = UIAlertAction.init(title: "welcome", style: .default, handler: nil)
-        let enterNo = UIAlertAction.init(title: "Retry", style: .destructive, handler: {(_) in
-            self.present(alertView, animated: true, completion: nil)
-        })
-        enterAlert.addAction(enterOk)
-        enterIncorrect.addAction(enterNo)
-        alertView.addTextField(configurationHandler: {(field: UITextField) in
-            field.textColor = UIColor.red
-            field.placeholder = "Password🔑"
-        })
-        
-        present(alertView, animated: true, completion: nil)
+//        let enterAlert = UIAlertController.init(title: nil, message: "Correct Password📲", preferredStyle: .actionSheet)
+//        let enterIncorrect = UIAlertController.init(title: nil, message: "InCorrect Password🔐", preferredStyle: .actionSheet)
+//        let alertView = UIAlertController.init(title: nil, message: "사진 좀 쓸게용🥰", preferredStyle: .alert)
+//
+//        let cancel = UIAlertAction.init(title: "시렁😝", style: .cancel, handler: {(_) in self.present(alertView, animated: true, completion: nil)})
+//        let permit = UIAlertAction.init(title: "그랭☺️", style: .default, handler:{(_) in
+//            enterText = (alertView.textFields?.first?.text)!
+//            print(enterText)
+//            if (enterText == "ok") {
+//                self.present(enterAlert, animated: true, completion: {print("alert Again")})
+//            } else{
+//                self.present(enterIncorrect, animated: true, completion: {})
+//            }
+//        })
+//        alertView.addAction(cancel)
+//        alertView.addAction(permit)
+//
+//        let enterOk = UIAlertAction.init(title: "welcome", style: .default, handler: nil)
+//        let enterNo = UIAlertAction.init(title: "Retry", style: .destructive, handler: {(_) in
+//            self.present(alertView, animated: true, completion: nil)
+//        })
+//        enterAlert.addAction(enterOk)
+//        enterIncorrect.addAction(enterNo)
+//        alertView.addTextField(configurationHandler: {(field: UITextField) in
+//            field.textColor = UIColor.red
+//            field.placeholder = "Password🔑"
+//        })
+//
+//        present(alertView, animated: true, completion: nil)
         
         
         

@@ -17,6 +17,7 @@ class PhotoListVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     @IBOutlet var sortTitleBtn: UIBarButtonItem!
     @IBOutlet var actionBtn: UIBarButtonItem!
     @IBOutlet var trashBtn: UIBarButtonItem!
+    @IBOutlet var refreshBtn: UIBarButtonItem!
     
     
     @IBOutlet var selectTitleBtn: UIBarButtonItem!
@@ -55,6 +56,8 @@ class PhotoListVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             deselectUI(indexPath: indexPath)
         }
         selectTitleBtn.title = "선택"
+        refreshBtn.isEnabled = true
+        sortTitleBtn.isEnabled = true
         navigationBar.title = albumName
         photoCollectionView.allowsMultipleSelection = false
         actionBtn.isEnabled = false
@@ -88,12 +91,16 @@ class PhotoListVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     @IBAction func selectBtn(_ sender: Any) {
         switch selectTitleBtn.title {
         case "선택":
+            refreshBtn.isEnabled = false
+            sortTitleBtn.isEnabled = false
             selectTitleBtn.title = "취소"
             navigationBar.title = "항목 선택"
             photoCollectionView.allowsMultipleSelection = true
             
         case "취소":
             deselectAll()
+            refreshBtn.isEnabled = true
+            sortTitleBtn.isEnabled = true
         default:
             return
         }
