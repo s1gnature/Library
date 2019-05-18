@@ -690,14 +690,13 @@
                             <constraint firstItem="acU-gd-jts" firstAttribute="leading" secondItem="6qu-wN-4ta" secondAttribute="leading" constant="5" id="S2Y-Ey-kao"/>
                             <constraint firstItem="Rib-18-Frf" firstAttribute="centerX" secondItem="kbU-a5-S0U" secondAttribute="centerX" id="Vuz-cU-c2w"/>
                             <constraint firstItem="Rib-18-Frf" firstAttribute="top" secondItem="VIH-jj-aay" secondAttribute="bottom" constant="8" id="ajU-LT-C3U"/>
-                            <constraint firstItem="6qu-wN-4ta" firstAttribute="trailing" secondItem="VIH-jj-aay" secondAttribute="trailing" constant="87.5" id="bF4-i9-ULL"/>
                             <constraint firstItem="6qu-wN-4ta" firstAttribute="trailing" secondItem="fea-DI-ye4" secondAttribute="trailing" constant="5" id="bOu-Js-nax"/>
                             <constraint firstAttribute="trailing" secondItem="acU-gd-jts" secondAttribute="trailing" constant="5" id="eU8-vC-jW5"/>
                             <constraint firstItem="6qu-wN-4ta" firstAttribute="bottom" secondItem="fea-DI-ye4" secondAttribute="bottom" constant="5" id="jIM-eu-82L"/>
                             <constraint firstItem="fea-DI-ye4" firstAttribute="centerX" secondItem="kbU-a5-S0U" secondAttribute="centerX" id="jcL-gh-zbr"/>
                             <constraint firstItem="fea-DI-ye4" firstAttribute="leading" secondItem="6qu-wN-4ta" secondAttribute="leading" constant="5" id="kqv-jT-2yt"/>
-                            <constraint firstItem="VIH-jj-aay" firstAttribute="leading" secondItem="6qu-wN-4ta" secondAttribute="leading" constant="87.5" id="nWf-f5-Moq"/>
                             <constraint firstItem="fea-DI-ye4" firstAttribute="top" secondItem="acU-gd-jts" secondAttribute="bottom" constant="8" id="rsc-OK-4Ru"/>
+                            <constraint firstItem="VIH-jj-aay" firstAttribute="centerX" secondItem="kbU-a5-S0U" secondAttribute="centerX" id="u1E-y7-nfp"/>
                             <constraint firstItem="WZx-hi-vCT" firstAttribute="leading" secondItem="6qu-wN-4ta" secondAttribute="leading" id="uTc-bB-aak"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6qu-wN-4ta"/>
