@@ -16,7 +16,7 @@ class CollectionVC: UIViewController, UICollectionViewDataSource {
     var movies: [Movie] = []
     
     @IBAction func sortBtn(_ sender: Any) {
-        let alert: UIAlertController = UIAlertController.init(title: "Change Sort", message: "select please", preferredStyle: .actionSheet)
+        let alert: UIAlertController = UIAlertController.init(title: "", message: "어떤 방법으로 정렬할까요?", preferredStyle: .actionSheet)
         let rate = UIAlertAction.init(title: "예매율", style: .default, handler: {(_) in
             requestType = 0
             self.requestMovieList(type: requestType)
@@ -87,7 +87,6 @@ class CollectionVC: UIViewController, UICollectionViewDataSource {
                 }
                 
             } catch(let err){
-                print("sibal...")
                 print(err.localizedDescription)
             }
         }
@@ -95,7 +94,7 @@ class CollectionVC: UIViewController, UICollectionViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let detailVC: TableViewDetailVC = segue.destination as! TableViewDetailVC
+        let detailVC: DetailVC = segue.destination as! DetailVC
         let indexPath = collectionView.indexPathsForSelectedItems
         print(movies[(indexPath?.first?.first)!].title)
         let currentMovie = movies[(indexPath?.first?.first)!]

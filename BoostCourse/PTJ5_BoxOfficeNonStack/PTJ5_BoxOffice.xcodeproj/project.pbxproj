@@ -22,7 +22,7 @@
 		FAC668362232600300BED971 /* tableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC668352232600300BED971 /* tableViewCell.swift */; };
 		FAC6683A22327F9E00BED971 /* collectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6683922327F9E00BED971 /* collectionViewCell.swift */; };
 		FAC6683D22363A8900BED971 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6683C22363A8900BED971 /* Function.swift */; };
-		FAC6683F2236469800BED971 /* TableViewDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6683E2236469800BED971 /* TableViewDetailVC.swift */; };
+		FAC6683F2236469800BED971 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6683E2236469800BED971 /* DetailVC.swift */; };
 		FAC668442237902800BED971 /* MovieDetailVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC668432237902800BED971 /* MovieDetailVO.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +46,7 @@
 		FAC668352232600300BED971 /* tableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tableViewCell.swift; sourceTree = "<group>"; };
 		FAC6683922327F9E00BED971 /* collectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = collectionViewCell.swift; sourceTree = "<group>"; };
 		FAC6683C22363A8900BED971 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
-		FAC6683E2236469800BED971 /* TableViewDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDetailVC.swift; sourceTree = "<group>"; };
+		FAC6683E2236469800BED971 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		FAC668432237902800BED971 /* MovieDetailVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailVO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +77,16 @@
 				B973E136A68DA0539134B02D /* Pods_PTJ5_BoxOffice.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA3AA503228FF274007B4A21 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FAC668352232600300BED971 /* tableViewCell.swift */,
+				FAC6683922327F9E00BED971 /* collectionViewCell.swift */,
+				FAAE799D2238DD9700FC07DF /* commentCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		FAC6681022324FA300BED971 = {
@@ -133,12 +143,10 @@
 		FAC6683822327F4C00BED971 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				FA3AA503228FF274007B4A21 /* Cell */,
 				FAC6681E22324FA300BED971 /* TableVC.swift */,
-				FAC668352232600300BED971 /* tableViewCell.swift */,
 				FAC6682F223250AE00BED971 /* CollectionVC.swift */,
-				FAC6683922327F9E00BED971 /* collectionViewCell.swift */,
-				FAC6683E2236469800BED971 /* TableViewDetailVC.swift */,
-				FAAE799D2238DD9700FC07DF /* commentCell.swift */,
+				FAC6683E2236469800BED971 /* DetailVC.swift */,
 				FAAE79A32238F93E00FC07DF /* CommentVC.swift */,
 			);
 			path = Main;
@@ -283,7 +291,7 @@
 			files = (
 				FAC668442237902800BED971 /* MovieDetailVO.swift in Sources */,
 				FAC6683222325C8100BED971 /* MovieModel.swift in Sources */,
-				FAC6683F2236469800BED971 /* TableViewDetailVC.swift in Sources */,
+				FAC6683F2236469800BED971 /* DetailVC.swift in Sources */,
 				FAAE799E2238DD9700FC07DF /* commentCell.swift in Sources */,
 				FAC6681F22324FA300BED971 /* TableVC.swift in Sources */,
 				FAAE79A22238E40C00FC07DF /* CommentListVO.swift in Sources */,

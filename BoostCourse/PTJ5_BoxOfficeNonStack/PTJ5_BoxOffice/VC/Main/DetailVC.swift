@@ -9,10 +9,9 @@
 import Foundation
 import UIKit
 
-let detailURL: String = "https://connect-boxoffice.run.goorm.io/movie?id="
-let commentURL: String = "https://connect-boxoffice.run.goorm.io/comments?movie_id="
 
-class TableViewDetailVC: UIViewController,UIScrollViewDelegate, UITableViewDataSource {
+
+class DetailVC: UIViewController,UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var navigationBar: UINavigationItem!
     @IBOutlet var scrollContentView: UIView!
@@ -42,8 +41,6 @@ class TableViewDetailVC: UIViewController,UIScrollViewDelegate, UITableViewDataS
     let networkingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var requestView: UIView = UIView.init()
     var indicatorBackground: UIView = UIView.init()
-    
-    
     
     
     func errorLoadingAlert(title: String, message: String){
@@ -148,6 +145,10 @@ class TableViewDetailVC: UIViewController,UIScrollViewDelegate, UITableViewDataS
         dataTask.resume()
     }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.comments.count
     }
@@ -158,13 +159,13 @@ class TableViewDetailVC: UIViewController,UIScrollViewDelegate, UITableViewDataS
         
         cell.userID.text = comment.writer
         cell.comment.text = comment.contents
+        cell.cosmosRateView.rating = comment.rating / 2
         
         let unixTimeStamp = comment.timestamp
         let date = Date(timeIntervalSince1970: unixTimeStamp)
         let dateFormatter = DateFormatter()
-//        dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
         dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" //Specify your format that you want
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let strDate = dateFormatter.string(from: date)
         cell.date.text = strDate
         
@@ -277,6 +278,7 @@ class TableViewDetailVC: UIViewController,UIScrollViewDelegate, UITableViewDataS
         self.scrollView.delegate = self
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.commentTableView.dataSource = self
+        self.commentTableView.delegate = self
         self.requestDetail()
         commentTableView.isScrollEnabled = false
         commentTableView.allowsSelection = false
@@ -289,11 +291,13 @@ class TableViewDetailVC: UIViewController,UIScrollViewDelegate, UITableViewDataS
         */
 
     }
-    override func viewWillAppear(_ animated: Bool) {
-        
-        
-    }
+
     override func viewDidAppear(_ animated: Bool) {
+        self.view.addSubview(indicatorBackground)
+        self.view.addSubview(networkingIndicator)
+        networkingIndicator.startAnimating()
+        indicatorBackground.isHidden = false
+        
         requestComment()
     }
 }

@@ -8,11 +8,13 @@
 
 import Foundation
 import UIKit
+import Cosmos
 
 class commentCell: UITableViewCell {
     @IBOutlet var userImage: UIImageView!
     @IBOutlet var userID: UILabel!
     @IBOutlet var comment: UILabel!
     @IBOutlet var date: UILabel!
+    @IBOutlet var cosmosRateView: CosmosView!
     
 }

@@ -8,8 +8,7 @@
 
 import UIKit
 
-let baseURL: String = "https://connect-boxoffice.run.goorm.io/movies?order_type="
-var requestType: Int = 0
+
 
 class TableVC: UIViewController, UITableViewDataSource {
     
@@ -21,7 +20,7 @@ class TableVC: UIViewController, UITableViewDataSource {
     
     
     @IBAction func sortBtn(_ sender: Any) {
-        let alert: UIAlertController = UIAlertController.init(title: "Change Sort", message: "select please", preferredStyle: .actionSheet)
+        let alert: UIAlertController = UIAlertController.init(title: "", message: "어떤 방법으로 정렬할까요?", preferredStyle: .actionSheet)
         let rate = UIAlertAction.init(title: "예매율", style: .default, handler: {(_) in
             requestType = 0
             self.requestMovieList(type: requestType)
@@ -64,11 +63,11 @@ class TableVC: UIViewController, UITableViewDataSource {
                 let apiResponse: APIResonse = try JSONDecoder().decode(APIResonse.self, from: data)
                 self.movies = apiResponse.movies
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+//                    self.tableView.reloadData()
+                    self.tableView.reloadSections(IndexSet(0...0), with: .automatic)
                 }
                 
             } catch(let err){
-                print("sibal...")
                 print(err.localizedDescription)
             }
         }
@@ -97,20 +96,13 @@ class TableVC: UIViewController, UITableViewDataSource {
         return cell
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let detailVC: TableViewDetailVC = segue.destination as! TableViewDetailVC
+        let detailVC: DetailVC = segue.destination as! DetailVC
         let indexPath = tableView.indexPathForSelectedRow
         print(movies[(indexPath?.row)!].title)
         let currentMovie = movies[(indexPath?.row)!]
-        
-//        guard let imageURL: URL = URL(string: currentMovie.thumb) else { return }
-//        guard let imageData: Data = try? Data(contentsOf: imageURL) else { return  }
-//        detailVC.poster = UIImage(data: imageData)
-//        detailVC.titleName = currentMovie.title
         detailVC.movieID = currentMovie.id
-        
     }
     @objc func refresh(_ sender: Any) {
-        // Call webservice here after reload tableview.
         tableView.reloadData()
         if refreshControll.isRefreshing
         {

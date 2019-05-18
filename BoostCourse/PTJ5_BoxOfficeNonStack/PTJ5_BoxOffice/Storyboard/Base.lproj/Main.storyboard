@@ -127,7 +127,7 @@
         <!--Title-->
         <scene sceneID="Sx7-QJ-Xmd">
             <objects>
-                <viewController storyboardIdentifier="TableViewDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gds-gM-IKv" customClass="TableViewDetailVC" customModule="PTJ5_BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TableViewDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gds-gM-IKv" customClass="DetailVC" customModule="PTJ5_BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jKi-vw-HID">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -429,58 +429,59 @@
                                                         <rect key="frame" x="0.0" y="43" width="375" height="1516.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="commentCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="200" id="RWK-JJ-5SO" customClass="commentCell" customModule="PTJ5_BoxOffice" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="375" height="200"/>
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="commentCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" id="RWK-JJ-5SO" customClass="commentCell" customModule="PTJ5_BoxOffice" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RWK-JJ-5SO" id="fjv-Wh-KJq">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user_loading" translatesAutoresizingMaskIntoConstraints="NO" id="BIr-OU-Dc4">
                                                                             <rect key="frame" x="5" y="5" width="36" height="36"/>
                                                                         </imageView>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="9g8-on-nyS">
-                                                                            <rect key="frame" x="46" y="5" width="89" height="194.5"/>
+                                                                            <rect key="frame" x="46" y="5" width="139" height="38.5"/>
                                                                             <subviews>
-                                                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WgH-au-SDP">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="89" height="65.5"/>
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="WgH-au-SDP">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="139" height="13"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="id" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PyN-lh-ch8">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="14" height="65.5"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="14" height="13"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
-                                                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kNx-UR-Kc9">
-                                                                                            <rect key="frame" x="14" y="0.0" width="75" height="65.5"/>
-                                                                                            <subviews>
-                                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_star_label" translatesAutoresizingMaskIntoConstraints="NO" id="vfY-Ml-rvE">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="15" height="65.5"/>
-                                                                                                </imageView>
-                                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_star_label" translatesAutoresizingMaskIntoConstraints="NO" id="HVd-2V-3mA">
-                                                                                                    <rect key="frame" x="15" y="0.0" width="15" height="65.5"/>
-                                                                                                </imageView>
-                                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_star_label" translatesAutoresizingMaskIntoConstraints="NO" id="WPY-dx-PuT">
-                                                                                                    <rect key="frame" x="30" y="0.0" width="15" height="65.5"/>
-                                                                                                </imageView>
-                                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_star_label" translatesAutoresizingMaskIntoConstraints="NO" id="s8M-HW-woU">
-                                                                                                    <rect key="frame" x="45" y="0.0" width="15" height="65.5"/>
-                                                                                                </imageView>
-                                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_star_label" translatesAutoresizingMaskIntoConstraints="NO" id="CiW-B5-jbZ">
-                                                                                                    <rect key="frame" x="60" y="0.0" width="15" height="65.5"/>
-                                                                                                </imageView>
-                                                                                            </subviews>
-                                                                                        </stackView>
+                                                                                        <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="jbV-RI-HuW" customClass="CosmosView" customModule="Cosmos">
+                                                                                            <rect key="frame" x="19" y="0.0" width="120" height="13"/>
+                                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            <userDefinedRuntimeAttributes>
+                                                                                                <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                                                                                    <integer key="value" value="5"/>
+                                                                                                </userDefinedRuntimeAttribute>
+                                                                                                <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                                                                                    <real key="value" value="1"/>
+                                                                                                </userDefinedRuntimeAttribute>
+                                                                                                <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
+                                                                                                    <integer key="value" value="1"/>
+                                                                                                </userDefinedRuntimeAttribute>
+                                                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
+                                                                                                <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="ic_star_large_full"/>
+                                                                                                <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="ic_star_large"/>
+                                                                                            </userDefinedRuntimeAttributes>
+                                                                                        </view>
                                                                                     </subviews>
+                                                                                    <constraints>
+                                                                                        <constraint firstItem="jbV-RI-HuW" firstAttribute="height" secondItem="PyN-lh-ch8" secondAttribute="height" id="R7x-eQ-7gq"/>
+                                                                                    </constraints>
                                                                                 </stackView>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKg-cO-t7C">
-                                                                                    <rect key="frame" x="0.0" y="67.5" width="89" height="51"/>
+                                                                                    <rect key="frame" x="0.0" y="15" width="139" height="10"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="comment" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPD-Qg-nyJ">
-                                                                                    <rect key="frame" x="0.0" y="120.5" width="89" height="74"/>
+                                                                                    <rect key="frame" x="0.0" y="27" width="139" height="11.5"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
@@ -498,6 +499,7 @@
                                                                 </tableViewCellContentView>
                                                                 <connections>
                                                                     <outlet property="comment" destination="LPD-Qg-nyJ" id="ahG-Am-SFe"/>
+                                                                    <outlet property="cosmosRateView" destination="jbV-RI-HuW" id="kD3-W7-0kn"/>
                                                                     <outlet property="date" destination="eKg-cO-t7C" id="itb-Nu-7lY"/>
                                                                     <outlet property="userID" destination="PyN-lh-ch8" id="MaL-8A-V7e"/>
                                                                     <outlet property="userImage" destination="BIr-OU-Dc4" id="KXZ-Hg-03b"/>
@@ -644,17 +646,17 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rib-18-Frf">
-                                <rect key="frame" x="178.5" y="163" width="18" height="20.5"/>
+                                <rect key="frame" x="178.5" y="205" width="18" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="VIH-jj-aay" customClass="CosmosView" customModule="Cosmos">
-                                <rect key="frame" x="87.5" y="115" width="200" height="40"/>
+                                <rect key="frame" x="87.5" y="157" width="200" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="rating">
-                                        <real key="value" value="10"/>
+                                        <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
                                         <integer key="value" value="5"/>
@@ -683,7 +685,7 @@
                             <constraint firstItem="VIH-jj-aay" firstAttribute="centerX" secondItem="kbU-a5-S0U" secondAttribute="centerX" id="6Kp-8e-c3I"/>
                             <constraint firstItem="7HF-f4-UIK" firstAttribute="top" secondItem="WZx-hi-vCT" secondAttribute="bottom" constant="20" id="FS9-cp-08P"/>
                             <constraint firstItem="7HF-f4-UIK" firstAttribute="leading" secondItem="6qu-wN-4ta" secondAttribute="leading" constant="10" id="MC1-XZ-zD4"/>
-                            <constraint firstItem="VIH-jj-aay" firstAttribute="top" secondItem="7HF-f4-UIK" secondAttribute="bottom" constant="8" id="Ms9-2u-lty"/>
+                            <constraint firstItem="VIH-jj-aay" firstAttribute="top" secondItem="7HF-f4-UIK" secondAttribute="bottom" constant="50" id="Ms9-2u-lty"/>
                             <constraint firstItem="WZx-hi-vCT" firstAttribute="trailing" secondItem="6qu-wN-4ta" secondAttribute="trailing" id="Rx7-ME-cBK"/>
                             <constraint firstItem="acU-gd-jts" firstAttribute="leading" secondItem="6qu-wN-4ta" secondAttribute="leading" constant="5" id="S2Y-Ey-kao"/>
                             <constraint firstItem="Rib-18-Frf" firstAttribute="centerX" secondItem="kbU-a5-S0U" secondAttribute="centerX" id="Vuz-cU-c2w"/>
@@ -900,7 +902,6 @@
         <image name="ic_12" width="20" height="20"/>
         <image name="ic_collection" width="25" height="25"/>
         <image name="ic_settings" width="24" height="24"/>
-        <image name="ic_star_label" width="15" height="15"/>
         <image name="ic_star_large" width="48" height="48"/>
         <image name="ic_star_large_full" width="48" height="48"/>
         <image name="ic_table" width="24" height="24"/>

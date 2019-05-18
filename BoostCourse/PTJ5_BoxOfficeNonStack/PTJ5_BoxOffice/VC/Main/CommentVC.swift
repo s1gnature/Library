@@ -10,9 +10,6 @@ import Foundation
 import UIKit
 import Cosmos
 
-// 한줄평 닉네임 저장은 유저 디폴트로 하면 될듯한데..
-let userDefault: UserDefaults = UserDefaults.init()
-
 class CommentVC: UIViewController {
     @IBOutlet var navigationBar: UINavigationBar!
     @IBOutlet var movieTitle: UILabel!
@@ -42,14 +39,14 @@ class CommentVC: UIViewController {
         else{
             
             // post JSON value
-            var newComment = Comment(rating: starRate.rating, timestamp: Date().timeIntervalSince1970, writer: nicknameTextField.text!, movie_id: movieID, contents: commentTextField.text!)
+            var newComment = Comment(rating: starRate.rating * 2, timestamp: Date().timeIntervalSince1970, writer: nicknameTextField.text!, movie_id: movieID, contents: commentTextField.text!)
 
             guard let uploadData = try? JSONEncoder().encode(newComment) else{
                 return
             }
             
-            let commentAddress: String = "https://connect-boxoffice.run.goorm.io/comment"
-            guard let url: URL = URL(string: commentAddress) else { return }
+            
+            guard let url: URL = URL(string: writeCommentAddress) else { return }
             var requestURL = URLRequest(url: url)
             requestURL.httpMethod = "POST"
             
@@ -66,6 +63,8 @@ class CommentVC: UIViewController {
             })
             dataTask.resume()
             
+            // commentID 저장
+            UserDefaults.standard.set(nicknameTextField.text!, forKey: "ID")
             
             
             let alert = UIAlertController.init(title: "", message: "한줄평 작성 완료", preferredStyle: .alert)
@@ -82,8 +81,14 @@ class CommentVC: UIViewController {
     
     override func viewDidLoad() {
         
-        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        // 이미 한줄평을 작성 했을 시 이전에 작성한 nickName을 불러옵니다.
+        if let userID = UserDefaults.standard.string(forKey: "ID"){
+            nicknameTextField.text = userID
+        }else{
+            
+        }
         
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         print(mtitle)
         movieTitle.text = mtitle
         movieGrade.image = grade
@@ -104,12 +109,8 @@ class CommentVC: UIViewController {
         // statusBar background color
         let statusBarView = UIApplication.shared.value(forKey: "statusBar") as! UIView
         statusBarView.backgroundColor = navigationBar.barTintColor
-//        UIApplication.shared.statusBarStyle = .lightContent
-//        self.setNeedsStatusBarAppearanceUpdate()
+
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-//        let vc: TableViewDetailVC = storyboard?.instantiateViewController(withIdentifier: "TableViewDetailVC") as! TableViewDetailVC
-//        vc.requestComment()
-    }
+
 }

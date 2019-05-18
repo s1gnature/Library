@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+let baseURL: String = "https://connect-boxoffice.run.goorm.io/movies?order_type="
+let detailURL: String = "https://connect-boxoffice.run.goorm.io/movie?id="
+let commentURL: String = "https://connect-boxoffice.run.goorm.io/comments?movie_id="
+let writeCommentAddress: String = "https://connect-boxoffice.run.goorm.io/comment"
+var requestType: Int = 0
 
 func changeTitle(requestType: Int) -> String {
     switch requestType {
