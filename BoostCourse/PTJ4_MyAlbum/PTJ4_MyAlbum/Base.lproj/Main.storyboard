@@ -35,33 +35,41 @@
                                             <rect key="frame" x="0.0" y="0.0" width="192" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="album" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYF-pP-Avm">
-                                                    <rect key="frame" x="0.0" y="99" width="42" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a8f-ss-uuk">
+                                                    <rect key="frame" x="0.0" y="0.0" width="192" height="90.5"/>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cnt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lH9-Og-bNT">
-                                                    <rect key="frame" x="0.0" y="119" width="25" height="21"/>
+                                                    <rect key="frame" x="0.0" y="120" width="192" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="Q1o-VW-uA1"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a8f-ss-uuk">
-                                                    <rect key="frame" x="0.0" y="0.0" width="192" height="97"/>
-                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="album" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYF-pP-Avm">
+                                                    <rect key="frame" x="0.0" y="100.5" width="192" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="xF8-53-AFU"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="a8f-ss-uuk" secondAttribute="trailing" id="8oj-Go-JRZ"/>
-                                            <constraint firstItem="a8f-ss-uuk" firstAttribute="leading" secondItem="PBb-Bo-0Gl" secondAttribute="leading" id="BnS-Ub-Gp3"/>
-                                            <constraint firstItem="a8f-ss-uuk" firstAttribute="top" secondItem="PBb-Bo-0Gl" secondAttribute="top" id="DG5-Pa-gQc"/>
-                                            <constraint firstAttribute="bottom" secondItem="lH9-Og-bNT" secondAttribute="bottom" id="Lud-dg-KaF"/>
-                                            <constraint firstItem="cYF-pP-Avm" firstAttribute="top" secondItem="a8f-ss-uuk" secondAttribute="bottom" constant="2" id="Tbi-Jt-XVY"/>
-                                            <constraint firstItem="lH9-Og-bNT" firstAttribute="leading" secondItem="PBb-Bo-0Gl" secondAttribute="leading" id="bpR-C6-sXI"/>
-                                            <constraint firstItem="cYF-pP-Avm" firstAttribute="leading" secondItem="PBb-Bo-0Gl" secondAttribute="leading" id="bz4-RA-MIC"/>
-                                            <constraint firstItem="lH9-Og-bNT" firstAttribute="top" secondItem="cYF-pP-Avm" secondAttribute="bottom" constant="2" id="qqx-5M-mQ2"/>
+                                            <constraint firstItem="a8f-ss-uuk" firstAttribute="leading" secondItem="PBb-Bo-0Gl" secondAttribute="leading" id="0Bp-MV-vRj"/>
+                                            <constraint firstItem="lH9-Og-bNT" firstAttribute="top" secondItem="cYF-pP-Avm" secondAttribute="bottom" constant="-0.5" id="2Cq-bq-QgD"/>
+                                            <constraint firstItem="a8f-ss-uuk" firstAttribute="top" secondItem="PBb-Bo-0Gl" secondAttribute="top" id="CkX-x5-0b6"/>
+                                            <constraint firstAttribute="bottom" secondItem="lH9-Og-bNT" secondAttribute="bottom" id="E9b-5G-yng"/>
+                                            <constraint firstItem="cYF-pP-Avm" firstAttribute="top" secondItem="a8f-ss-uuk" secondAttribute="bottom" constant="10" id="EmM-Ts-h0G"/>
+                                            <constraint firstAttribute="trailing" secondItem="cYF-pP-Avm" secondAttribute="trailing" id="Tve-Sr-9i9"/>
+                                            <constraint firstAttribute="trailing" secondItem="a8f-ss-uuk" secondAttribute="trailing" id="jK0-xz-N2w"/>
+                                            <constraint firstItem="cYF-pP-Avm" firstAttribute="leading" secondItem="PBb-Bo-0Gl" secondAttribute="leading" id="mhc-fk-BLw"/>
+                                            <constraint firstItem="lH9-Og-bNT" firstAttribute="leading" secondItem="PBb-Bo-0Gl" secondAttribute="leading" id="vaH-PC-Vsd"/>
+                                            <constraint firstAttribute="trailing" secondItem="lH9-Og-bNT" secondAttribute="trailing" id="zL5-VO-CZu"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="albumNameLabel" destination="cYF-pP-Avm" id="DZt-A4-tCS"/>

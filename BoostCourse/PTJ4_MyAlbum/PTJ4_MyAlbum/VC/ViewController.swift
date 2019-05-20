@@ -10,6 +10,7 @@ import UIKit
 import Photos
 var isChanged: Bool = false
 var enterText: String = ""
+let deviceWidth = UIScreen.main.bounds.width
 
 class ViewController: UIViewController , UICollectionViewDataSource, UICollectionViewDelegate, PHPhotoLibraryChangeObserver {
     func photoLibraryDidChange(_ changeInstance: PHChange) {
@@ -199,7 +200,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
     
     //MARK:: 앨범 안에서 사진 삭제 후 앨범 Cnt 수정이 안됨.. 썸네일은 수정 되는데... 시불장거
     override func viewWillAppear(_ animated: Bool) {
-//        self.collectionView.reloadSections(IndexSet(0...0))
+        self.collectionView.reloadData()
+        self.collectionView.reloadSections(IndexSet(0...0))
+        
         if (isChanged){
             print(selectedIndex)
             /*
@@ -257,7 +260,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
         // how to bring Screen's width & height
         // UIScreen.main.bounds.--
         let flowLayout: UICollectionViewFlowLayout
-        let halfWidth: CGFloat = UIScreen.main.bounds.width / 2.0
+        let halfWidth: CGFloat = deviceWidth / 2.0
 
         flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets.init(top: 10, left: 10, bottom: 0, right: 10) // -> 셀 간 간격 지정
@@ -268,7 +271,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
         
 
         // itemSize 고정
-        flowLayout.itemSize = CGSize(width: halfWidth - 20 , height: halfWidth)
+        flowLayout.itemSize = CGSize(width: halfWidth - 20 , height: halfWidth + 40)
         // itemSize 유동적으로 수정해줌 ?
 //        flowLayout.estimatedItemSize = CGSize(width: halfWidth - 20, height: halfWidth - 20)
         
