@@ -107,6 +107,9 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return UITableView.automaticDimension
     }
     
+    func messageFromBottom(){
+        self.tableView.scrollToRow(at: IndexPath(item: self.commentList.count - 1, section: 0), at: .bottom, animated: true)
+    }
     
     // keyboardLayoutConstraint
     @objc func keyboardWillShow(notification: Notification){
@@ -118,7 +121,7 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             self.view.layoutIfNeeded()
             }, completion: { (completion) in
                 if self.commentList.count > 0 {
-                    self.tableView.scrollToRow(at: IndexPath(item: self.commentList.count - 1, section: 0), at: .bottom, animated: true)
+                    self.messageFromBottom()
                 }
         })
     }
@@ -163,7 +166,6 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
        DBRef = Database.database().reference().child("DB_edit").child("ChatRoom").child(self.chatRoomUid!).child("Comments")
         observe = DBRef!.observe(.value, with: { (snapshot) in
             
-            // removeAll 사용하면 말풍선 1개씩밖에 안나와져벌임.
             self.commentList.removeAll()
             self.commentUid.removeAll()
         
@@ -206,12 +208,8 @@ class ChattingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
             
             self.tableView.reloadData()
-            
+            self.messageFromBottom()
         })
-    }
-    
-    func readUserCnt(){
-        
     }
     
     

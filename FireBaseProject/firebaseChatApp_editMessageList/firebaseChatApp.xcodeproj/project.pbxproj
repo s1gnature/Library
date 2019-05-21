@@ -86,6 +86,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FA3AA506229010B7007B4A21 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FA8A4A4A2278401100CACE35 /* userTableViewCell.swift */,
+				FA8A4A5022798A7200CACE35 /* myMessageCell.swift */,
+				FA6ABDCF227AB2C900FE6A28 /* partnerMessageCell.swift */,
+				FA6ABDD3227C0D6700FE6A28 /* chatListCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		FA8A4A4322783E9700CACE35 /* VO */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,14 +119,11 @@
 		FA8A4A4722783F4900CACE35 /* MainVC */ = {
 			isa = PBXGroup;
 			children = (
+				FA3AA506229010B7007B4A21 /* Cell */,
 				FA9A71C32276B6430038A965 /* UserVC.swift */,
-				FA8A4A4A2278401100CACE35 /* userTableViewCell.swift */,
 				FA8A4A4C2278537E00CACE35 /* ChattingVC.swift */,
-				FA8A4A5022798A7200CACE35 /* myMessageCell.swift */,
-				FA6ABDCF227AB2C900FE6A28 /* partnerMessageCell.swift */,
 				FA8A4A4822783F7000CACE35 /* InfoVC.swift */,
 				FA6ABDD1227C0D5200FE6A28 /* chatListVC.swift */,
-				FA6ABDD3227C0D6700FE6A28 /* chatListCell.swift */,
 			);
 			path = MainVC;
 			sourceTree = "<group>";
