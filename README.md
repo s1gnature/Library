@@ -15,8 +15,3 @@
 # What I'm Doing
 - DDD 3th iOS Developer
 - INU AppCenter
-- Incheon Civic Hack-fair
-
-# Want To Learn
-- RxSwift
-- SwiftUI
