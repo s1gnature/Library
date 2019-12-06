@@ -8,8 +8,7 @@
 - NEXTERS 15th - [ChalangMalang](https://apps.apple.com/kr/app/찰랑말랑/id1477694079)
 - BoostCourse
 
- #### Framework
-- Firebase
+
 ---
 
 # What I'm Doing
