@@ -1,8 +1,8 @@
-# Contact
+## Contact
 
 - lamant0486@naver.com
 
-# What I'm Done
+## Done
 ---------------
  #### Project
 - NEXTERS 15th - [ChalangMalang](https://apps.apple.com/kr/app/찰랑말랑/id1477694079)
@@ -11,6 +11,6 @@
 
 ---
 
-# What I'm Doing
+## Doing
 - DDD 3th iOS Developer
 - INU AppCenter
