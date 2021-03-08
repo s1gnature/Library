@@ -1,15 +1,1 @@
-## Contact
-
-- lamant0486@naver.com
-
-## Done
- #### Project
-- DDD 3th iOS Developer
-- NEXTERS 15th - [ChalangMalang](https://apps.apple.com/kr/app/찰랑말랑/id1477694079)
-- BoostCourse
-
-
-
-
-## Doing
-- INU AppCenter
+![Click Me!](https://www.notion.so/Shin-Myung-Sub-b721f21843484c5787c62385540b174a)
